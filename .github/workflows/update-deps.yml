@@ -1,40 +1,23 @@
-name: Update npm dependencies
-
-on:
-  schedule:
-    - cron: '0 6 * * 1' # каждую неделю в понедельник в 6:00 UTC
-  workflow_dispatch:
-
-permissions:
-  contents: write
-
-jobs:
-  update:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install npm-check-updates
-        run: npm install -g npm-check-updates
-
-      - name: Update package.json
-        run: ncu -u
-
-      - name: Commit and push changes
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add package.json
-          if git diff --cached --quiet; then
-            echo "No updates found."
-          else
-            git commit -m "chore: update npm dependencies"
-            git push
-          fi
+#name: Deploy test website on push
+#
+#on:
+#  push:
+#    branches:
+#      - main
+#
+#jobs:
+#  web-deploy:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Get latest code
+#        uses: actions/checkout@v4
+#
+#      - name: Upload files via FTP
+#        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+#        with:
+#          server: ${{ secrets.TEST_FTP_HOST }} #TODO заменить данные на production
+#          username: ${{ secrets.TEST_FTP_USER }}
+#          password: ${{ secrets.TEST_FTP_PASSWORD }}
+#          local-dir: ./
+#          server-dir: /www/adem77.ru/wp-content/themes/triton/
