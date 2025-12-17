@@ -2,6 +2,6 @@
 /**
  * Example template.
  *
- * @package Theme_name
+ * @package Anna-vip
  * @since 1.0.0
  */
