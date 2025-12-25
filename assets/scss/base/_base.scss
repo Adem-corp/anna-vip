@@ -61,6 +61,7 @@ img {
 }
 
 button {
+	font-family: var(--font-primary), sans-serif;
 	cursor: pointer;
 
 	&:disabled {
@@ -86,6 +87,7 @@ input {
 }
 
 textarea {
+	width: 100%;
 	resize: none;
 }
 
@@ -99,6 +101,18 @@ object {
 
 address {
 	font-style: normal;
+}
+
+hr {
+	height: 1px;
+	margin-bottom: 1.5em;
+	background-color: #ccc;
+	border: 0;
+}
+
+table {
+	width: 100%;
+	margin: 0 0 1.5em;
 }
 
 .hidden {
@@ -140,11 +154,21 @@ address {
 
 .container {
 	position: relative;
-	max-width: 1140px;
+	max-width: 1200px;
 	margin: 0 auto;
 	@include laptop {
 		max-width: 100%;
 		margin-right: 0.75rem;
 		margin-left: 0.75rem;
+	}
+}
+
+#ajax_loader {
+	margin: 15px 0;
+	text-align: center;
+	opacity: 0;
+
+	&.loading {
+		opacity: 1;
 	}
 }

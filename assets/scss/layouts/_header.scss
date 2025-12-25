@@ -1,3 +1,148 @@
-.header {
+@use "../helpers" as *;
 
+.header {
+	@include tablet {
+		border-bottom: 1px solid #ccc;
+	}
+
+	&__container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		@include tablet {
+			grid-template-columns: auto 1fr;
+		}
+		@include tablet-sm {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	&__logo {
+		height: 100%;
+
+		img {
+			display: block;
+			@include laptop-sm {
+				height: 100%;
+				object-fit: cover;
+			}
+			@include tablet {
+				width: auto;
+				margin: 0 auto;
+			}
+		}
+	}
+
+	&__contacts {
+		display: flex;
+		flex-wrap: wrap;
+		margin-left: -55px;
+		@include tablet {
+			width: max-content;
+			margin-left: calc(100vw - 930px);
+		}
+		@include tablet-sm {
+			margin: 0 auto;
+			padding: 15px 0;
+		}
+	}
+
+	&__offices {
+		display: flex;
+		flex-wrap: wrap;
+		max-width: 370px;
+		font-weight: 700;
+		font-size: 22px;
+		font-style: italic;
+		text-shadow: -1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
+		@include tablet {
+			font-size: 18px;
+		}
+		@include to(425px) {
+			font-size: 16px;
+		}
+		@include to(375px) {
+			font-size: 14px;
+		}
+	}
+
+	&__offices-caption {
+		padding-left: 75px;
+		color: #ffde00;
+	}
+
+	&__office-title {
+		display: flex;
+		flex-grow: 1;
+		margin-right: 10px;
+
+		&::after {
+			margin-left: auto;
+			content: '–';
+		}
+
+		span {
+			margin-right: 10px;
+		}
+	}
+
+	&__office-tel {
+		margin-bottom: 5px;
+		text-decoration: none;
+
+		+ .header__office-tel {
+			width: 100%;
+			text-align: right;
+		}
+	}
+
+	&__insta {
+		margin: 25px 0 0 25px;
+	}
+}
+
+@supports(display: grid) {
+
+	.header__container {
+		display: grid;
+		grid-template-columns: repeat(2, auto);
+	}
+
+	.header__contacts {
+		display: grid;
+		grid-gap: 25px;
+		grid-template-columns: auto auto;
+	}
+
+	.header__offices {
+		display: grid;
+		grid-row-gap: 5px;
+		grid-column-gap: 10px;
+		grid-template-columns: auto auto;
+	}
+
+	.header__offices-caption {
+		grid-column: 1/3;
+	}
+
+	.header__office-title {
+		margin: 0;
+	}
+
+	.header__office-tel {
+		grid-column: 2/3;
+		margin: 0;
+
+		+ .header__office-tel {
+			width: auto;
+			text-align: left;
+		}
+	}
+
+	.header__insta {
+		margin: 25px 0 0;
+	}
 }

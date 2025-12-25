@@ -1,0 +1,40 @@
+@use "../helpers" as *;
+
+.order {
+
+	&__table {
+		border-color: #dee2e6;
+		@include mob {
+			font-size: 10px;
+		}
+
+		td, th {
+			padding: 0.5rem;
+			border: 1px solid #dee2e6;
+		}
+
+		&_client {
+
+			td {
+
+				&:first-child {
+					width: 215px;
+				}
+			}
+		}
+
+		&_catalog {
+
+			td {
+
+				&:first-child {
+					width: 215px;
+				}
+
+				&:nth-child(4) {
+					width: 200px;
+				}
+			}
+		}
+	}
+}

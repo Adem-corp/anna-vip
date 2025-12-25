@@ -1,5 +1,7 @@
 'use strict';
 
+let $ = jQuery.noConflict();
+
 function slideUp(target, duration = 400) {
 	target.style.height = target.offsetHeight + "px";
 	target.style.boxSizing = "border-box";
@@ -175,9 +177,177 @@ function sendForms() {
 	});
 }
 
+function initTabs() {
+	let Tabs = {
+		init: function() {
+			this.bindUIfunctions();
+		},
+
+		bindUIfunctions: function() {
+			$('.js-tabs').on("click", "li:not(.active)", function(e) {
+				Tabs.changeTab($(this));
+			});
+
+			$('.js-tabs').on("click", "li.active", function(e) {
+				Tabs.toggleMobileMenu(e, this);
+			});
+		},
+
+		changeTab: function(tab_link) {
+			let tab_item = $('#' + tab_link.data('tab'));
+
+			tab_link.addClass("active").siblings().removeClass("active");
+
+			tab_item.addClass("active").siblings().removeClass("active");
+
+			tab_link.closest(".js-tabs").removeClass("open");
+		},
+
+		toggleMobileMenu: function(event, el) {
+			$(el).closest(".js-tabs").toggleClass("open");
+		}
+	};
+
+	Tabs.init();
+}
+
+function loadMorePosts() {
+	const ajax_loader = document.querySelector('#ajax_loader');
+
+	if (ajax_loader) {
+		const options = {
+			root: null,
+			rootMargin: '0px',
+			threshold: 0.1
+		}
+
+		const observer = new IntersectionObserver(load_more, options);
+
+		observer.observe(ajax_loader);
+
+		function load_more(element, observer) {
+			const ajax_loader = document.querySelector('#ajax_loader');
+
+			if (element[0].intersectionRatio) {
+				ajax_loader.classList.add('loading');
+				current_page++;
+
+				$.ajax({
+					url: ajaxurl,
+					data: {
+						'action': 'load_more',
+						'page' : current_page
+					},
+					type: 'POST',
+					success: function (data) {
+						if(data) {
+							$('.page__grid').append(data);
+						}
+					},
+					complete: function () {
+						ajax_loader.classList.remove('loading');
+					}
+				});
+			}
+		}
+	}
+}
+
+function burgerToggle() {
+	$('.js-burger').on('click', function () {
+		$('.menu-container').fadeToggle();
+	});
+}
+
+function initSidebarMenu() {
+	$('.sidebar__menu > .menu-item').on('mouseenter', function (e) {
+		e.preventDefault();
+		$(this).siblings().find('.sub-menu').hide();
+		$(this).find('.sub-menu').fadeIn();
+		$(this).addClass('hover');
+	}).on('mouseleave', function () {
+		$('.sub-menu').hide();
+		$(this).removeClass('hover');
+	});
+}
+
+function sendSubscribeForm() {
+	$('form#subscribe').on('submit', function (e) {
+		e.preventDefault();
+		const form = $(this);
+		let formData = new FormData(form.get(0));
+
+		if (form.data('name')) {
+			formData.append('form_name', form.data('name'));
+		} else {
+			return;
+		}
+
+		$.ajax({
+			type: 'POST',
+			url: '/wp-admin/admin-ajax.php?action=subscribe',
+			data: formData,
+			cache: false,
+			processData: false,
+			contentType: false,
+			success: function (data) {
+				$.fancybox.close();
+				form.trigger("reset");
+				setTimeout(function () {
+					$.fancybox.open({
+						src: '<div class="success" id="order_success">' +
+							'<svg class="success__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">' +
+							'<circle class="success__icon-circle" cx="26" cy="26" r="25" fill="none" />' +
+							'<path class="success__icon-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />' +
+							'</svg>' +
+							'<h3>Спасибо</h3>' +
+							'<p>Вы подписаны на рассылку новостей.</p>' +
+							'<button class="btn btn_success" type="button" data-fancybox-close>OK</button>' +
+							'</div>',
+						type: 'inline',
+						modal: true
+					});
+				}, 100);
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				console.log(jqXHR, textStatus, errorThrown);
+			}
+		});
+	});
+}
+
+function sendStatusForm() {
+	$('form#status').on('submit', function (e) {
+		e.preventDefault();
+		const form = $(this);
+		let formData = new FormData(form.get(0));
+
+		$.ajax({
+			type: 'POST',
+			url: '/wp-admin/admin-ajax.php?action=status',
+			data: formData,
+			cache: false,
+			processData: false,
+			contentType: false,
+			success: function (data) {
+				$('.status').html(data);
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				console.log(jqXHR, textStatus, errorThrown);
+			}
+		});
+	});
+}
+
 document.addEventListener("DOMContentLoaded", function () {
 	Fancybox.bind();
 
+	burgerToggle();
+	initSidebarMenu();
+	initTabs();
+	loadMorePosts();
 	setTelMask();
 	sendForms();
+	sendStatusForm();
+	sendSubscribeForm();
 });

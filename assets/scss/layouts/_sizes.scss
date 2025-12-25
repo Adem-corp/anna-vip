@@ -1,0 +1,110 @@
+@use "../helpers" as *;
+
+.sizes {
+
+	&__tabs {
+		justify-content: center;
+		margin: 0 0 15px;
+		padding: 0;
+		list-style-type: none;
+
+		&_gender {
+			display: flex;
+		}
+
+		&_cloth {
+			display: flex;
+			@include mob {
+				flex-wrap: wrap;
+			}
+		}
+	}
+
+	&__tab {
+		border: 1px solid transparent;
+		cursor: pointer;
+		transition: all 0.3s;
+
+		&_gender {
+			padding: 5px 10px;
+			background-color: #c4c4c4;
+			@include to(375px) {
+				font-size: 12px;
+			}
+
+			&.active {
+				color: #fff;
+				background-color: var(--color-accent);
+			}
+
+			&:not(:last-child) {
+				margin-right: 10px;
+			}
+		}
+
+		&_cloth {
+			flex-shrink: 0;
+			margin: 0 5px;
+			padding-bottom: 5px;
+			border-radius: 5px;
+			@include mob {
+				margin-top: 5px;
+			}
+
+			img {
+				border-radius: inherit;
+			}
+
+			&.active {
+				border: 1px solid var(--color-accent);
+
+				.sizes__cat {
+					color: var(--color-accent);
+				}
+			}
+		}
+	}
+
+	&__gender {
+		display: none;
+
+		&.active {
+			display: block;
+		}
+	}
+
+	&__cat {
+		font-size: 10px;
+		text-align: center;
+	}
+
+	&__table {
+		display: none;
+
+		&.active {
+			display: block;
+		}
+	}
+}
+
+@supports (display: grid) {
+
+	.sizes {
+
+		&__tabs {
+
+			&_cloth {
+				display: grid;
+				grid-gap: 10px;
+				grid-template-columns: repeat(auto-fit, minmax(auto, 58px));
+			}
+		}
+
+		&__tab {
+
+			&_cloth {
+				margin: 0;
+			}
+		}
+	}
+}

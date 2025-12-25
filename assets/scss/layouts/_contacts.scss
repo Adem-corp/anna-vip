@@ -1,0 +1,115 @@
+@use "../helpers" as *;
+
+.contacts {
+
+	&__container {
+		display: flex;
+		@include tablet {
+			grid-template-columns: 1fr;
+		}
+
+		.contacts__item {
+
+			&:not(:last-child) {
+				margin-right: 20px;
+			}
+		}
+	}
+
+	&__item {
+		display: flex;
+		flex: 1;
+		align-items: stretch;
+		margin-bottom: 1.5em;
+		@include mob {
+			display: block;
+		}
+
+		&:nth-child(3n + 1) {
+
+			.contacts__text {
+				border-color: #c9c;
+			}
+
+			.contacts__title {
+				background-color: #fcf;
+			}
+		}
+
+		&:nth-child(3n + 2) {
+
+			.contacts__text {
+				border-color: #cc9;
+			}
+
+			.contacts__title {
+				background-color: #ffc;
+			}
+		}
+
+		&:nth-child(3n + 3) {
+
+			.contacts__text {
+				border-color: #c09b54;
+			}
+
+			.contacts__title {
+				background-color: #f3ce87;
+			}
+		}
+	}
+
+	&__text {
+		flex: 1;
+		height: 100%;
+		text-align: center;
+		border-style: solid;
+		border-width: 2px;
+		border-radius: 3px;
+	}
+
+	&__title {
+		padding: 0.5em 1em;
+		font-weight: 700;
+		font-size: 1.1em;
+	}
+
+	&__body {
+		padding: 1em;
+
+		p {
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	&__map {
+		flex: 1;
+		margin-left: 1.5em;
+		@include mob {
+			min-height: 350px;
+			margin: 1.5em 0 0;
+		}
+	}
+}
+
+@supports (display: grid) {
+
+	.contacts {
+
+		&__container {
+			display: grid;
+			grid-gap: 20px;
+			grid-template-columns: repeat(3, 1fr);
+
+			.contacts__item {
+
+				&:not(:last-child) {
+					margin: 0 0 1.5em;
+				}
+			}
+		}
+	}
+}

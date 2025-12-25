@@ -1,0 +1,78 @@
+@use "../helpers" as *;
+
+.sidebar {
+	flex-shrink: 0;
+	width: 200px;
+	margin-right: 50px;
+	@include tablet-sm {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 50px;
+	}
+
+	.nav {
+		margin-bottom: 30px;
+	}
+
+	&__info-container {
+		@include tablet-sm {
+			order: -1;
+		}
+	}
+
+	&__info {
+		position: relative;
+		margin-bottom: 20px;
+		padding: 10px 10px 10px 25px;
+		font-size: 14px;
+		background-color: #f5f5f5;
+		box-shadow: 0 0 7px 0 rgba(#000, 0.2);
+
+		&::before {
+			position: absolute;
+			top: 10px;
+			left: 5px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 14px;
+			height: 14px;
+			color: #fff;
+			font-size: 12px;
+			line-height: 14px;
+			background-color: #f39223;
+			border-radius: 100%;
+			content: '!';
+		}
+	}
+
+	&__subscribe {
+		margin-bottom: 20px;
+
+		p {
+			margin-bottom: 1em;
+			font-weight: 700;
+		}
+
+		.btn {
+			padding: 10px 15px;
+		}
+	}
+}
+
+@supports (display: grid) {
+
+	.sidebar {
+		width: auto;
+		margin-right: 0;
+
+		&__info {
+
+			&::before {
+				display: grid;
+				place-items: center;
+				line-height: normal;
+			}
+		}
+	}
+}

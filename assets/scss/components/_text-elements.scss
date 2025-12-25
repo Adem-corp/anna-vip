@@ -1,0 +1,14 @@
+@use "../helpers" as *;
+
+.table {
+	overflow-x: auto;
+
+	table {
+		max-width: 100%;
+		border-collapse: collapse;
+		@include mob {
+			width: 100%;
+			font-size: 12px;
+		}
+	}
+}

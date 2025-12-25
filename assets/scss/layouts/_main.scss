@@ -1,0 +1,21 @@
+@use "../helpers" as *;
+
+.main {
+	padding-top: 50px;
+
+	&__container {
+		display: flex;
+		@include tablet-sm {
+			display: block;
+		}
+	}
+}
+
+@supports(display: grid) {
+
+	.main__container {
+		display: grid;
+		grid-gap: 50px;
+		grid-template-columns: minmax(auto, 200px) 1fr;
+	}
+}

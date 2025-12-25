@@ -1,0 +1,73 @@
+@use "../helpers" as *;
+
+.pagination {
+	padding: 20px 0;
+	@include mob {
+		padding: 15px 0;
+		font-size: 12px;
+	}
+
+	&__list {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+	}
+
+	&__item {
+
+		&:not(.next):not(.prev) {
+			margin: 0 4px;
+
+			a,
+			span {
+				display: grid;
+				width: 34px;
+				height: 34px;
+				border-radius: 100%;
+				place-items: center;
+				@include mob {
+					width: 23px;
+					height: 23px;
+				}
+			}
+		}
+
+		&.prev {
+			margin-right: 20px;
+		}
+
+		&.next {
+			margin-left: 20px;
+		}
+
+		&.current {
+
+			span {
+				background-color: var(--color-accent);
+			}
+		}
+
+		&.disabled {
+			opacity: 0.5;
+
+			button {
+				cursor: not-allowed;
+			}
+		}
+
+		a,
+		span,
+		button {
+			display: block;
+			margin: 0;
+			padding: 0;
+			color: #fff;
+			text-decoration: none;
+			background: none;
+			border: none;
+		}
+	}
+}

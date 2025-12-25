@@ -1,3 +1,10 @@
-.footer {
+@use "../helpers" as *;
 
+.footer {
+	padding: 15px 0;
+	border-top: 1px solid #ccc;
+
+	&__info {
+		text-align: center;
+	}
 }

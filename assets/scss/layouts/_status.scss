@@ -1,0 +1,82 @@
+@use "../helpers" as *;
+
+.status {
+	margin-bottom: 20px;
+
+	&__form {
+		max-width: 500px;
+		margin: 0 auto;
+
+		label {
+			display: flex;
+			margin-bottom: 15px;
+
+			span {
+				width: 35%;
+			}
+		}
+
+		input[type="number"] {
+			-moz-appearance: textfield;
+
+			&::-webkit-outer-spin-button,
+			&::-webkit-inner-spin-button {
+				margin: 0;
+				-webkit-appearance: none;
+			}
+		}
+	}
+
+	&__table {
+		max-width: 100%;
+		font-size: 14px;
+		border-collapse: collapse;
+		@include tablet-sm {
+			font-size: 12px;
+		}
+		@include mob {
+			font-size: 6px;
+		}
+
+		tr {
+
+			&:not(:first-child) {
+
+				td {
+					border: 1px solid #dee2e6;
+				}
+			}
+
+			&:nth-child(2) {
+
+				td {
+					white-space: nowrap;
+				}
+			}
+		}
+
+		td {
+			padding: 0.5em;
+		}
+	}
+
+	&__total {
+		font-weight: 700;
+		text-align: right;
+	}
+
+	&__name {
+		font-weight: 700;
+		font-size: 16px;
+		@include tablet-sm {
+			font-size: 14px;
+		}
+		@include mob {
+			font-size: 10px;
+		}
+	}
+
+	&__check {
+		text-align: right;
+	}
+}
