@@ -10,7 +10,10 @@
 
 </main>
 <footer class="footer">
-
+	<div class="container">
+		<div class="footer__info"><a href="<?php echo esc_url( get_privacy_policy_url() ); ?>" target="_blank">Политика конфиденциальности</a></div>
+		<div class="footer__info">anna-vip.ru © <?php echo esc_html( gmdate( 'Y' ) ); ?></div>
+	</div>
 </footer>
 
 <?php

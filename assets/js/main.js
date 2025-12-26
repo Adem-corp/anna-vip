@@ -179,21 +179,21 @@ function sendForms() {
 
 function initTabs() {
 	let Tabs = {
-		init: function() {
+		init: function () {
 			this.bindUIfunctions();
 		},
 
-		bindUIfunctions: function() {
-			$('.js-tabs').on("click", "li:not(.active)", function(e) {
+		bindUIfunctions: function () {
+			$('.js-tabs').on("click", "li:not(.active)", function (e) {
 				Tabs.changeTab($(this));
 			});
 
-			$('.js-tabs').on("click", "li.active", function(e) {
+			$('.js-tabs').on("click", "li.active", function (e) {
 				Tabs.toggleMobileMenu(e, this);
 			});
 		},
 
-		changeTab: function(tab_link) {
+		changeTab: function (tab_link) {
 			let tab_item = $('#' + tab_link.data('tab'));
 
 			tab_link.addClass("active").siblings().removeClass("active");
@@ -203,7 +203,7 @@ function initTabs() {
 			tab_link.closest(".js-tabs").removeClass("open");
 		},
 
-		toggleMobileMenu: function(event, el) {
+		toggleMobileMenu: function (event, el) {
 			$(el).closest(".js-tabs").toggleClass("open");
 		}
 	};
@@ -233,14 +233,15 @@ function loadMorePosts() {
 				current_page++;
 
 				$.ajax({
-					url: ajaxurl,
+					url: adem_ajax.url,
 					data: {
 						'action': 'load_more',
-						'page' : current_page
+						'page': current_page,
+						'query': JSON.stringify(query)
 					},
 					type: 'POST',
 					success: function (data) {
-						if(data) {
+						if (data) {
 							$('.page__grid').append(data);
 						}
 					},
