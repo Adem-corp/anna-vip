@@ -1,25 +1,73 @@
 @use "../helpers" as *;
 
+.menu-top {
+	display: flex;
+	gap: 22px;
+	align-items: center;
+	justify-content: center;
+	font-weight: 300;
+	@include from(1025px) {
+		color: #464646;
+	}
+	@include tablet {
+		flex-direction: column;
+		gap: 15px;
+		align-items: flex-start;
+	}
+
+	a {
+		text-decoration: none;
+		@include tablet {
+			display: block;
+			padding: 5px 10px;
+		}
+	}
+}
+
+.menu-main {
+	display: flex;
+	gap: 35px;
+	align-items: center;
+	font-weight: 300;
+	@include laptop {
+		gap: 25px;
+	}
+	@include tablet {
+		flex-direction: column;
+		gap: 15px;
+		align-items: flex-start;
+	}
+
+	a {
+		text-decoration: none;
+		@include tablet {
+			display: block;
+			padding: 5px 10px;
+		}
+	}
+
+	.menu-item {
+		@include tablet {
+			width: 100%;
+		}
+
+		&.accent {
+
+			a {
+				padding: 10px 12px;
+				color: #fff;
+				font-weight: 500;
+				font-size: 18px;
+				background-color: var(--color-accent);
+				@include from(1025px) {
+					border-radius: 10px;
+				}
+			}
+		}
+	}
+}
+
 .nav {
-
-	&_top {
-		background-color: #eee;
-		@include tablet {
-			position: relative;
-			z-index: 10;
-		}
-	}
-
-	&_main {
-		background-color: #c4c4c4;
-		@include tablet {
-			display: none;
-		}
-	}
-
-	&_sales {
-		margin-bottom: 30px;
-	}
 
 	&__menu {
 		padding: 0;
@@ -51,100 +99,56 @@
 		color: #021b6d;
 		font-weight: 700;
 	}
-}
 
-.menu-container {
-	@include tablet {
+	.sub-menu {
 		position: absolute;
-		top: 100%;
-		right: 0;
-		left: 0;
+		top: 0;
+		left: 100%;
 		display: none;
+		min-width: 200px;
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
 		background-color: #eee;
-	}
+		@include tablet-sm {
+			position: static;
+			padding: 10px 15px;
+		}
 
-	.menu-main {
-		display: none;
-		@include tablet {
+		&::before {
+			position: absolute;
+			top: 8px;
+			left: -5px;
 			display: block;
-		}
-	}
-
-	.nav__menu {
-		@include tablet {
-			margin: 0;
-		}
-	}
-}
-
-.menu-top {
-	display: flex;
-	justify-content: center;
-	@include tablet {
-		display: block;
-	}
-
-	.menu-item {
-
-		&:not(:last-child) {
-			margin-right: 50px;
-			@include tablet {
-				margin: 0;
+			width: 10px;
+			height: 10px;
+			background-color: #eee;
+			transform: rotate(45deg);
+			content: '';
+			@include tablet-sm {
+				display: none;
 			}
 		}
-	}
 
-	a {
-		display: block;
-		padding: 8px 13px;
-		@include tablet {
-			padding: 11px 16px;
-		}
-	}
+		a {
+			display: block;
+			padding: 5px 10px;
+			transition: all 0.1s linear;
 
-	li {
-
-		&.current-menu-item {
-
-			a {
-				@include tablet {
-					color: #fff;
-					background-color: var(--color-accent);
-				}
+			&:not(:last-child) {
+				margin-bottom: 1px;
 			}
-		}
-	}
-}
 
-.menu-main {
-	display: flex;
-	font-size: 18px;
-	text-transform: uppercase;
-	@include laptop-sm {
-		justify-content: space-between;
-		font-size: 14px;
-	}
-
-	li {
-
-		&.current-menu-item {
-
-			a {
+			@include hover {
 				color: #fff;
 				background-color: var(--color-accent);
 			}
 		}
 	}
 
-	a {
-		display: block;
-		padding: 11px 16px;
-		transition: all 0.3s linear;
-
-		&:hover {
-			color: #fff;
-			background-color: var(--color-accent);
-		}
+	.menu-item {
+		position: relative;
+		z-index: 1;
 	}
 }
 
@@ -186,55 +190,4 @@
 			}
 		}
 	}
-}
-
-.sub-menu {
-	position: absolute;
-	top: 0;
-	left: 100%;
-	display: none;
-	min-width: 200px;
-	margin: 0;
-	padding: 0;
-	list-style-type: none;
-	background-color: #eee;
-	@include tablet-sm {
-		position: static;
-		padding: 10px 15px;
-	}
-
-	&::before {
-		position: absolute;
-		top: 8px;
-		left: -5px;
-		display: block;
-		width: 10px;
-		height: 10px;
-		background-color: #eee;
-		transform: rotate(45deg);
-		content: '';
-		@include tablet-sm {
-			display: none;
-		}
-	}
-
-	a {
-		display: block;
-		padding: 5px 10px;
-		transition: all 0.1s linear;
-
-		&:not(:last-child) {
-			margin-bottom: 1px;
-		}
-
-		@include hover {
-			color: #fff;
-			background-color: var(--color-accent);
-		}
-	}
-}
-
-.menu-item {
-	position: relative;
-	z-index: 1;
 }

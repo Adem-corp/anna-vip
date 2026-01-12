@@ -6,8 +6,9 @@
  * @since 1.0.0
  */
 
-$option_header   = get_field( 'header', 'option' );
-$option_contacts = get_field( 'contacts', 'option' );
+$option_tel    = get_field( 'tel', 'option' );
+$option_email  = get_field( 'email', 'option' );
+$option_social = get_field( 'social', 'option' );
 ?>
 
 <!doctype html>
@@ -23,69 +24,106 @@ $option_contacts = get_field( 'contacts', 'option' );
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <header class="header">
-	<nav id="top-nav" class="nav nav_top">
-		<button class="nav__toggle js-burger">Меню</button>
-		<div class="menu-container">
-			<?php
-			wp_nav_menu(
-				array(
-					'theme_location' => 'menu_main',
-					'container'      => '',
-					'menu_id'        => 'menu-mobile',
-					'menu_class'     => 'reset-list container nav__menu menu-main',
-				)
-			);
-
-			wp_nav_menu(
-				array(
-					'theme_location' => 'menu_top',
-					'container'      => '',
-					'menu_id'        => 'menu-top',
-					'menu_class'     => 'reset-list container nav__menu menu-top',
-				)
-			);
-			?>
-		</div>
-	</nav>
 	<div class="container header__container">
-		<a href="<?php echo site_url( '/' ); ?>" class="header__logo">
-			<picture>
-				<source srcset="<?php echo esc_url( $option_header['logo_mob']['url'] ); ?>" media="(max-width: 768px)">
-				<img src="<?php echo esc_url( $option_header['logo']['url'] ); ?>" alt="<?php echo esc_attr( $option_header['logo']['alt'] ); ?>" width="<?php echo esc_attr( $option_header['logo']['width'] ); ?>" height="<?php echo esc_attr( $option_header['logo']['width'] ); ?>">
-			</picture>
+		<a href="<?php echo esc_url( site_url( '/' ) ); ?>" class="header__logo">
+			<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.png' ); ?>" alt="" width="170" height="105">
 		</a>
-		<div class="header__contacts">
-			<div class="header__offices">
-				<div class="header__offices-caption">Наши офисы:</div>
-				<?php foreach ( $option_contacts['offices'] as $office ) : ?>
-					<div class="header__office-title" style="color: <?php echo esc_attr( $office['color'] ); ?>">
-						<span><?php echo esc_html( $office['title'] ); ?></span>
-					</div>
-					<?php foreach ( $office['tel'] as $tel ) : ?>
-							<a href="<?php echo esc_url( 'tel:' . adem_clear_tel( $tel['number'] ) ); ?>" class="header__office-tel" style="color: <?php echo esc_attr( $office['color'] ); ?>"><?php echo esc_html( $tel['number'] ); ?></a>
-					<?php endforeach; ?>
-				<?php endforeach; ?>
-			</div>
-			<?php if ( $option_header['insta'] ) : ?>
-				<div class="header__insta">
-					<a href="<?php echo esc_url( $option_header['insta'] ); ?>" title="Наш Instagram" target="_blank">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/instagram.svg' ); ?>" alt="Наш Instagram">
+		<div class="header__content">
+			<div class="header__line header__top">
+				<?php if ( $option_tel ) : ?>
+					<a href="<?php echo esc_url( 'tel:' . adem_clear_tel( $option_tel ) ); ?>" class="header__contact">
+						<svg width="17" height="17">
+							<use xlink:href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/sprite.svg#i-tel' ); ?>"></use>
+						</svg>
+						<?php echo esc_html( $option_tel ); ?>
 					</a>
-				</div>
-			<?php endif; ?>
+				<?php endif; ?>
+				<?php if ( $option_email ) : ?>
+					<a href="<?php echo esc_url( 'mailto:' . $option_email ); ?>" class="header__contact header__email">
+						<svg width="20" height="16">
+							<use xlink:href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/sprite.svg#i-email' ); ?>"></use>
+						</svg>
+						<?php echo esc_html( $option_email ); ?>
+					</a>
+				<?php endif; ?>
+				<?php
+				wp_nav_menu(
+					array(
+						'theme_location' => 'menu_top',
+						'container'      => '',
+						'menu_id'        => 'menu-top',
+						'menu_class'     => 'reset-list menu-top header__menu-top',
+						'depth'          => 1,
+					)
+				);
+				?>
+				<button class="header__link" type="button" data-src="#modal-call" data-fancybox>Заказать консультацию</button>
+			</div>
+			<div class="header__line header__bottom">
+				<?php if ( $option_tel ) : ?>
+					<a href="<?php echo esc_url( 'tel:' . adem_clear_tel( $option_tel ) ); ?>" class="header__contact">
+						<svg width="17" height="17">
+							<use xlink:href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/sprite.svg#i-tel' ); ?>"></use>
+						</svg>
+						<?php echo esc_html( $option_tel ); ?>
+					</a>
+				<?php endif; ?>
+				<nav class="burger js-burger">
+					<?php
+					wp_nav_menu(
+						array(
+							'theme_location' => 'menu_main',
+							'container'      => '',
+							'menu_id'        => 'menu-main',
+							'menu_class'     => 'reset-list menu-main header__menu-main',
+							'depth'          => 1,
+						)
+					);
+					?>
+					<?php
+					wp_nav_menu(
+						array(
+							'theme_location' => 'menu_top',
+							'container'      => '',
+							'menu_id'        => 'menu-top',
+							'menu_class'     => 'reset-list menu-top header__menu-top',
+							'depth'          => 1,
+						)
+					);
+					?>
+				</nav>
+				<?php if ( $option_social ) : ?>
+					<ul class="reset-list social header__social">
+						<li class="header__cart">
+							<a href="#" class="social__link">
+								<svg width="36" height="36">
+									<use xlink:href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/sprite.svg#i-cart' ); ?>"></use>
+								</svg>
+							</a>
+						</li>
+						<?php foreach ( $option_social as $item ) : ?>
+							<li>
+								<a href="<?php echo esc_url( $item['link'] ); ?>" class="social__link">
+									<svg width="32" height="32">
+										<use xlink:href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/sprite.svg#i-' . $item['icon'] ); ?>"></use>
+									</svg>
+								</a>
+							</li>
+						<?php endforeach; ?>
+						<li class="header__burger-btn">
+							<button class="social__link burger-btn js-burger-btn" type="button">
+								<svg width="24" height="24" class="burger-btn__main-icon">
+									<use xlink:href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/sprite.svg#i-burger' ); ?>"></use>
+								</svg>
+								<svg width="24" height="24" class="burger-btn__close-icon">
+									<use xlink:href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/sprite.svg#i-close' ); ?>"></use>
+								</svg>
+							</button>
+						</li>
+					</ul>
+				<?php endif; ?>
+			</div>
 		</div>
 	</div>
-	<nav id="main-nav" class="nav nav_main">
-		<?php
-		wp_nav_menu(
-			array(
-				'theme_location' => 'menu_main',
-				'container'      => '',
-				'menu_id'        => 'menu-main',
-				'menu_class'     => 'reset-list container nav__menu menu-main',
-			)
-		);
-		?>
-	</nav>
 </header>
 <main class="main">

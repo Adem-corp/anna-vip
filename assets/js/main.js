@@ -255,8 +255,14 @@ function loadMorePosts() {
 }
 
 function burgerToggle() {
-	$('.js-burger').on('click', function () {
-		$('.menu-container').fadeToggle();
+	const burgerBtn = document.querySelector('.js-burger-btn');
+	const burgerContainer = document.querySelector('.js-burger');
+
+	if (!burgerBtn || !burgerContainer) return;
+
+	burgerBtn.addEventListener('click', function (e) {
+		burgerBtn.classList.toggle('active');
+		burgerContainer.classList.toggle('active');
 	});
 }
 

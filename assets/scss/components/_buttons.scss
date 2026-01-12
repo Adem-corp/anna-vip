@@ -59,3 +59,24 @@
 		}
 	}
 }
+
+.burger-btn {
+	padding: 0;
+	background: none;
+	border: none;
+
+	&__close-icon {
+		display: none;
+	}
+
+	&.active {
+
+		.burger-btn__main-icon {
+			display: none;
+		}
+
+		.burger-btn__close-icon {
+			display: block;
+		}
+	}
+}
