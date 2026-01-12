@@ -67,6 +67,41 @@
 	}
 }
 
+.menu-footer {
+	display: flex;
+	font-size: 12px;
+	@include tablet {
+		justify-content: center;
+		width: 100%;
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	.menu-item {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding-inline: 60px;
+		border-left: 1px solid #D9D9D9;
+		@include laptop {
+			padding-inline: 30px;
+		}
+		@include tablet {
+			padding-block: 15px;
+		}
+		@include to(375px) {
+			flex: 1 0;
+			padding: 10px;
+		}
+
+		&:last-child {
+			border-right: 1px solid #D9D9D9;
+		}
+	}
+}
+
 .nav {
 
 	&__menu {

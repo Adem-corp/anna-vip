@@ -33,6 +33,7 @@ register_nav_menus(
 		'menu_sales'   => 'Скидки',
 		'menu_catalog' => 'Каталог',
 		'menu_top'     => 'Верхнее',
+		'menu_footer'  => 'Футер',
 	)
 );
 
