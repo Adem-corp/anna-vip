@@ -1,0 +1,22 @@
+@use "../helpers" as *;
+
+.title {
+	font-weight: 600;
+
+	&:is(h1) {
+		font-size: 48px;
+		@include laptop-sm {
+			font-size: 42px;
+		}
+		@include tablet-sm {
+			font-size: 36px;
+		}
+		@include mob {
+			font-size: 32px;
+		}
+	}
+
+	&:is(h2) {
+		font-size: 42px;
+	}
+}

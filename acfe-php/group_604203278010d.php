@@ -184,6 +184,25 @@ acf_add_local_field_group(array(
 			'return_format' => 'array',
 		),
 		array(
+			'key' => 'field_6965f3a74c04a',
+			'label' => 'Карта (iframe)',
+			'name' => 'map',
+			'type' => 'text',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+			'maxlength' => '',
+		),
+		array(
 			'key' => 'field_60f43148d8b22',
 			'label' => 'Каталоги',
 			'name' => '',
@@ -325,7 +344,7 @@ acf_add_local_field_group(array(
 	'acfe_display_title' => '',
 	'acfe_meta' => '',
 	'acfe_note' => '',
-	'modified' => 1768207888,
+	'modified' => 1768289225,
 ));
 
 endif;

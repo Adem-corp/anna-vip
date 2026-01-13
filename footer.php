@@ -13,6 +13,7 @@ $option_tel       = get_field( 'tel', 'option' );
 $option_work_time = get_field( 'work-time', 'option' );
 ?>
 
+</div>
 </main>
 <footer class="footer">
 	<div class="container footer__container">

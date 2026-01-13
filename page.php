@@ -8,16 +8,22 @@
 
 get_header();
 
-$query = new WP_Query(
-	array(
-		'post_type'   => 'post',
-		'post_status' => 'publish',
-	)
-);
+// $query = new WP_Query(
+// array(
+// 'post_type'   => 'post',
+// 'post_status' => 'publish',
+// )
+// );
 ?>
 
-<div class="container main__container">
-	<?php get_template_part( 'layouts/partials/sidebar' ); ?>
+<div class="main__content">
+	<?php
+	get_template_part( 'layouts/partials/blocks' );
+
+	the_content();
+	?>
+</div>
+<!--
 	<section class="page">
 		<h1 class="page__title"><?php the_title(); ?></h1>
 		<div class="page__body"><?php the_content(); ?></div>
@@ -48,11 +54,6 @@ $query = new WP_Query(
 			<?php get_template_part( 'layouts/partials/contacts' ); ?>
 		<?php endif; ?>
 	</section>
-	<?php
-	get_template_part( 'layouts/partials/blocks' );
-
-	the_content();
-	?>
-</div>
+	-->
 
 <?php get_footer(); ?>

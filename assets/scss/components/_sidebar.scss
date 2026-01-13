@@ -2,8 +2,9 @@
 
 .sidebar {
 	flex-shrink: 0;
-	width: 200px;
-	margin-right: 50px;
+	@include from(769px) {
+		width: 200px;
+	}
 	@include tablet-sm {
 		display: flex;
 		flex-direction: column;
@@ -56,23 +57,6 @@
 
 		.btn {
 			padding: 10px 15px;
-		}
-	}
-}
-
-@supports (display: grid) {
-
-	.sidebar {
-		width: auto;
-		margin-right: 0;
-
-		&__info {
-
-			&::before {
-				display: grid;
-				place-items: center;
-				line-height: normal;
-			}
 		}
 	}
 }

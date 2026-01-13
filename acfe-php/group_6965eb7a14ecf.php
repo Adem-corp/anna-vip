@@ -1,0 +1,146 @@
+<?php 
+
+if( function_exists('acf_add_local_field_group') ):
+
+acf_add_local_field_group(array(
+	'key' => 'group_6965eb7a14ecf',
+	'title' => 'Контент',
+	'fields' => array(
+		array(
+			'key' => 'field_6965eb8d46a10',
+			'label' => 'Блоки',
+			'name' => 'blocks',
+			'type' => 'flexible_content',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'acfe_flexible_advanced' => 1,
+			'acfe_flexible_stylised_button' => 0,
+			'acfe_flexible_hide_empty_message' => 0,
+			'acfe_flexible_empty_message' => '',
+			'acfe_flexible_layouts_templates' => 0,
+			'acfe_flexible_layouts_placeholder' => 0,
+			'acfe_flexible_layouts_thumbnails' => 1,
+			'acfe_flexible_layouts_settings' => 0,
+			'acfe_flexible_layouts_locations' => 0,
+			'acfe_flexible_async' => array(
+			),
+			'acfe_flexible_add_actions' => array(
+			),
+			'acfe_flexible_remove_button' => array(
+			),
+			'acfe_flexible_layouts_state' => 'user',
+			'acfe_flexible_modal_edit' => array(
+				'acfe_flexible_modal_edit_enabled' => '0',
+				'acfe_flexible_modal_edit_size' => 'large',
+			),
+			'acfe_flexible_modal' => array(
+				'acfe_flexible_modal_enabled' => '1',
+				'acfe_flexible_modal_title' => '',
+				'acfe_flexible_modal_size' => 'full',
+				'acfe_flexible_modal_col' => '4',
+				'acfe_flexible_modal_categories' => '0',
+			),
+			'acfe_flexible_grid' => array(
+				'acfe_flexible_grid_enabled' => '0',
+				'acfe_flexible_grid_align' => 'center',
+				'acfe_flexible_grid_valign' => 'stretch',
+				'acfe_flexible_grid_wrap' => false,
+			),
+			'layouts' => array(
+				'layout_6965eb96b2985' => array(
+					'key' => 'layout_6965eb96b2985',
+					'name' => 'contacts',
+					'label' => 'Контакты',
+					'display' => 'block',
+					'sub_fields' => array(
+						array(
+							'key' => 'field_6965ec78829f5',
+							'label' => '',
+							'name' => '',
+							'type' => 'clone',
+							'instructions' => '',
+							'required' => 0,
+							'conditional_logic' => 0,
+							'wrapper' => array(
+								'width' => '',
+								'class' => '',
+								'id' => '',
+							),
+							'clone' => array(
+								0 => 'group_6965ec1c318c0',
+							),
+							'display' => 'seamless',
+							'layout' => 'block',
+							'prefix_label' => 0,
+							'prefix_name' => 0,
+							'acfe_seamless_style' => 0,
+							'acfe_clone_modal' => 0,
+							'acfe_clone_modal_close' => 0,
+							'acfe_clone_modal_button' => '',
+							'acfe_clone_modal_size' => 'large',
+						),
+					),
+					'min' => '',
+					'max' => '',
+					'acfe_flexible_thumbnail' => '',
+					'acfe_flexible_render_template' => false,
+					'acfe_flexible_render_style' => false,
+					'acfe_flexible_render_script' => false,
+					'acfe_flexible_settings' => false,
+					'acfe_flexible_settings_size' => 'medium',
+					'acfe_layout_locations' => array(
+					),
+					'acfe_flexible_modal_edit_size' => false,
+					'acfe_flexible_category' => false,
+					'acfe_layout_col' => 'auto',
+					'acfe_layout_allowed_col' => false,
+				),
+			),
+			'button_label' => 'Добавить блок',
+			'min' => '',
+			'max' => '',
+			'acfe_flexible_layouts_previews' => false,
+			'acfe_flexible_grid_container' => false,
+		),
+	),
+	'location' => array(
+		array(
+			array(
+				'param' => 'post_type',
+				'operator' => '==',
+				'value' => 'post',
+			),
+		),
+		array(
+			array(
+				'param' => 'post_type',
+				'operator' => '==',
+				'value' => 'page',
+			),
+		),
+	),
+	'menu_order' => 0,
+	'position' => 'acf_after_title',
+	'style' => 'default',
+	'label_placement' => 'top',
+	'instruction_placement' => 'label',
+	'hide_on_screen' => '',
+	'active' => true,
+	'description' => '',
+	'acfe_autosync' => array(
+		0 => 'php',
+	),
+	'acfe_form' => 0,
+	'acfe_display_title' => '',
+	'acfe_meta' => '',
+	'acfe_note' => '',
+	'modified' => 1768287389,
+));
+
+endif;

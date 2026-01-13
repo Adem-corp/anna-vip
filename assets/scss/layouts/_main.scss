@@ -2,20 +2,28 @@
 
 .main {
 	padding-top: 50px;
+	@include mob {
+		padding-top: 30px;
+	}
 
 	&__container {
 		display: flex;
+		@include from(769px) {
+			gap: 50px;
+		}
 		@include tablet-sm {
-			display: block;
+			flex-direction: column-reverse;
 		}
 	}
-}
 
-@supports(display: grid) {
+	&__content {
+		flex: 1 0;
 
-	.main__container {
-		display: grid;
-		grid-gap: 50px;
-		grid-template-columns: minmax(auto, 200px) 1fr;
+		section {
+
+			&:first-child {
+				padding-top: 0;
+			}
+		}
 	}
 }
