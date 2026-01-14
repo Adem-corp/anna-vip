@@ -19,4 +19,8 @@
 	&:is(h2) {
 		font-size: 42px;
 	}
+
+	&--center {
+		text-align: center;
+	}
 }

@@ -1,6 +1,10 @@
 @use "../helpers" as *;
 
 .sizes {
+	padding-block: 60px;
+	@include mob {
+		padding-block: 30px;
+	}
 
 	&__tabs {
 		justify-content: center;
@@ -13,10 +17,9 @@
 		}
 
 		&_cloth {
-			display: flex;
-			@include mob {
-				flex-wrap: wrap;
-			}
+			display: grid;
+			grid-gap: 10px;
+			grid-template-columns: repeat(auto-fit, minmax(auto, 58px));
 		}
 	}
 
@@ -44,7 +47,7 @@
 
 		&_cloth {
 			flex-shrink: 0;
-			margin: 0 5px;
+			margin: 0;
 			padding-bottom: 5px;
 			border-radius: 5px;
 			@include mob {
@@ -83,28 +86,6 @@
 
 		&.active {
 			display: block;
-		}
-	}
-}
-
-@supports (display: grid) {
-
-	.sizes {
-
-		&__tabs {
-
-			&_cloth {
-				display: grid;
-				grid-gap: 10px;
-				grid-template-columns: repeat(auto-fit, minmax(auto, 58px));
-			}
-		}
-
-		&__tab {
-
-			&_cloth {
-				margin: 0;
-			}
 		}
 	}
 }
