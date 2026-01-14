@@ -1,0 +1,12 @@
+@use "../helpers" as *;
+
+.text {
+	margin-block: 60px;
+	@include mob {
+		margin-block: 30px;
+	}
+
+	&__body {
+		line-height: 1.3;
+	}
+}

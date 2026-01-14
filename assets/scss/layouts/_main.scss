@@ -1,9 +1,9 @@
 @use "../helpers" as *;
 
 .main {
-	padding-top: 50px;
+	margin-top: 60px;
 	@include mob {
-		padding-top: 30px;
+		margin-top: 30px;
 	}
 
 	&__container {
@@ -22,7 +22,7 @@
 		section {
 
 			&:first-child {
-				padding-top: 0;
+				margin-top: 0;
 			}
 		}
 	}

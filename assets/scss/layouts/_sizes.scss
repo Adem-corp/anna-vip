@@ -1,9 +1,9 @@
 @use "../helpers" as *;
 
 .sizes {
-	padding-block: 60px;
+	margin-block: 60px;
 	@include mob {
-		padding-block: 30px;
+		margin-block: 30px;
 	}
 
 	&__tabs {
