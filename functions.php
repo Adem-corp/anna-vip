@@ -53,9 +53,6 @@ function adem_enqueue_scripts() {
 	wp_enqueue_style( 'adem', get_stylesheet_uri(), array(), ADEM_THEME_VERSION );
 	wp_enqueue_script( 'adem', get_template_directory_uri() . '/assets/js/main.min.js', array(), ADEM_THEME_VERSION, true );
 	wp_localize_script( 'adem', 'adem_ajax', array( 'url' => admin_url( 'admin-ajax.php' ) ) );
-	if ( get_the_ID() == 12 ) {
-		wp_enqueue_script( 'yandex-map', '//api-maps.yandex.ru/2.1/?lang=ru_RU', array(), null, false );
-	}
 }
 
 // Remove svg filters.
@@ -83,6 +80,7 @@ require 'inc/acf.php';
 require 'inc/load-more.php';
 require 'inc/mail.php';
 require 'inc/rest.php';
+require 'inc/status.php';
 require 'inc/svg.php';
 require 'inc/theme-functions.php';
 require 'inc/tiny-mce.php';

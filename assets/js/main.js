@@ -324,25 +324,31 @@ function sendSubscribeForm() {
 }
 
 function sendStatusForm() {
-	$('form#status').on('submit', function (e) {
-		e.preventDefault();
-		const form = $(this);
-		let formData = new FormData(form.get(0));
+	const form = document.querySelector('#status');
+	const container = document.querySelector('.status__container');
 
-		$.ajax({
-			type: 'POST',
-			url: '/wp-admin/admin-ajax.php?action=status',
-			data: formData,
-			cache: false,
-			processData: false,
-			contentType: false,
-			success: function (data) {
-				$('.status').html(data);
-			},
-			error: function (jqXHR, textStatus, errorThrown) {
-				console.log(jqXHR, textStatus, errorThrown);
-			}
-		});
+	if (!form || !container) return;
+
+	form.addEventListener('submit', function (e) {
+		e.preventDefault();
+
+		let formData = new FormData(form);
+
+		formData.append('action', 'status');
+
+		form.classList.add('loading');
+
+		const response = fetch(adem_ajax.url, {
+			method: 'POST',
+			body: formData
+		})
+			.then(response => response.text())
+			.then(data => {
+				container.innerHTML = data;
+			})
+			.catch((error) => {
+				console.error('Error:', error);
+			});
 	});
 }
 

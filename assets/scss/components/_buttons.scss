@@ -1,6 +1,19 @@
 @use "../helpers" as *;
 
 .btn {
+	display: block;
+	padding: 10px 20px;
+	color: #fff;
+	font-size: 18px;
+	border: none;
+	border-radius: 10px;
+
+	&--main {
+		background-color: var(--color-accent);
+	}
+}
+
+.btn-old {
 	border: none;
 
 	&_main {
