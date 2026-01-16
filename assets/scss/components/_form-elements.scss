@@ -13,6 +13,10 @@
 		color: rgba(#000, 0.7);
 		font-weight: 300;
 	}
+
+	&:focus {
+		border-color: var(--color-accent);
+	}
 }
 
 select {

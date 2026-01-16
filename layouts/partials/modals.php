@@ -8,14 +8,12 @@
 
 ?>
 
-<form class="subscribe" data-name="Подписка на рассылку" id="subscribe">
-	<h3>Подписаться на рассылку</h3>
-	<input class="subscribe__input" type="text" name="client_name" placeholder="Ваше имя *" required>
-	<input class="subscribe__input" type="email" name="client_email" placeholder="Ваш email *" required>
-	<label class="checkbox" style="display: block; margin-bottom: 20px; font-size: 14px;">
-		<input type="checkbox" name="policy" required>
-		<span class="checkbox__text">Даю согласие на обработку моих персональных данных в соответствии с <a href="<?php echo esc_url( get_privacy_policy_url() ); ?>" target="_blank">Политикой конфиденциальности</a></span>
-	</label>
-	<button type="submit" class="btn btn_main subscribe__btn">Отправить</button>
-	<?php adem_wp_nonce_field( 'Подписка на рассылку' ); ?>
-</form>
+<div class="modal modal--success" id="order-success">
+	<svg class="modal__success-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+		<circle class="modal__success-circle" cx="26" cy="26" r="25" fill="none" />
+		<path class="modal__success-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+	</svg>
+	<div class="modal__title">Поздравляем!</div>
+	<div class="modal__text">Ваш заказ № <strong></strong> отправлен.</div>
+	<button class="btn btn--success" type="button" data-fancybox-close>OK</button>
+</div>

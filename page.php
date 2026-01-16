@@ -8,12 +8,12 @@
 
 get_header();
 
-// $query = new WP_Query(
-// array(
-// 'post_type'   => 'post',
-// 'post_status' => 'publish',
-// )
-// );
+$query = new WP_Query(
+	array(
+		'post_type'   => 'post',
+		'post_status' => 'publish',
+	)
+);
 ?>
 
 <div class="main__content">

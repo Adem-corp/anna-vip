@@ -52,7 +52,14 @@ function adem_enqueue_scripts() {
 	wp_enqueue_script( 'swiper', get_template_directory_uri() . '/assets/vendor/js/swiper-bundle.min.js', array(), '12.0.3', true );
 	wp_enqueue_style( 'adem', get_stylesheet_uri(), array(), ADEM_THEME_VERSION );
 	wp_enqueue_script( 'adem', get_template_directory_uri() . '/assets/js/main.min.js', array(), ADEM_THEME_VERSION, true );
-	wp_localize_script( 'adem', 'adem_ajax', array( 'url' => admin_url( 'admin-ajax.php' ) ) );
+	wp_localize_script(
+		'adem',
+		'adem_ajax',
+		array(
+			'url'      => admin_url( 'admin-ajax.php' ),
+			'catalogs' => get_field( 'catalogs', 'option' ),
+		)
+	);
 }
 
 // Remove svg filters.
@@ -79,6 +86,7 @@ function adem_change_excerpt_more() {
 require 'inc/acf.php';
 require 'inc/load-more.php';
 require 'inc/mail.php';
+require 'inc/order.php';
 require 'inc/rest.php';
 require 'inc/status.php';
 require 'inc/svg.php';

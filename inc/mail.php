@@ -89,6 +89,12 @@ function adem_acf_register_fields() {
 					),
 				),
 				array(
+					'key'   => 'field_asd87gdf98sf09823jfsd4',
+					'label' => 'Почта для дублей заявок',
+					'name'  => 'order-mail',
+					'type'  => 'email',
+				),
+				array(
 					'key'   => 'field_dfs2825hdsdf8234',
 					'label' => 'Почта отправителя',
 					'name'  => 'sender-mail',
@@ -122,7 +128,9 @@ function mail_meta_box() {
  * @param object $post Post object.
  */
 function mail_meta_box_function( $post ) {
-	$meta_body = get_post_meta( $post->ID, 'mail-body', true );
+	$meta_body  = get_post_meta( $post->ID, 'office_client', true );
+	$meta_body .= get_post_meta( $post->ID, 'order', true );
+	$meta_body .= get_post_meta( $post->ID, 'mail-body', true );
 
 	echo wp_kses_post( $meta_body );
 }

@@ -278,51 +278,6 @@ function initSidebarMenu() {
 	});
 }
 
-function sendSubscribeForm() {
-	$('form#subscribe').on('submit', function (e) {
-		e.preventDefault();
-		const form = $(this);
-		let formData = new FormData(form.get(0));
-
-		if (form.data('name')) {
-			formData.append('form_name', form.data('name'));
-		} else {
-			return;
-		}
-
-		$.ajax({
-			type: 'POST',
-			url: '/wp-admin/admin-ajax.php?action=subscribe',
-			data: formData,
-			cache: false,
-			processData: false,
-			contentType: false,
-			success: function (data) {
-				$.fancybox.close();
-				form.trigger("reset");
-				setTimeout(function () {
-					$.fancybox.open({
-						src: '<div class="success" id="order_success">' +
-							'<svg class="success__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">' +
-							'<circle class="success__icon-circle" cx="26" cy="26" r="25" fill="none" />' +
-							'<path class="success__icon-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />' +
-							'</svg>' +
-							'<h3>Спасибо</h3>' +
-							'<p>Вы подписаны на рассылку новостей.</p>' +
-							'<button class="btn btn_success" type="button" data-fancybox-close>OK</button>' +
-							'</div>',
-						type: 'inline',
-						modal: true
-					});
-				}, 100);
-			},
-			error: function (jqXHR, textStatus, errorThrown) {
-				console.log(jqXHR, textStatus, errorThrown);
-			}
-		});
-	});
-}
-
 function sendStatusForm() {
 	const form = document.querySelector('#status');
 	const container = document.querySelector('.status__container');
@@ -352,6 +307,132 @@ function sendStatusForm() {
 	});
 }
 
+function orderFromCatalogs() {
+	const form = document.querySelector('form#order');
+	const addBtn = document.querySelector('#add_pos');
+	const calcOrderBtn = document.querySelector('#calc_order');
+	let counter = 1;
+
+	if (!form) return;
+
+	function addCatalogRow() {
+		const lastRow = document.querySelector('.order__table tr:last-child');
+		let rowHtml = `<tr class="order__catalog-row" data-name="Позиция ${counter}">
+														<td data-name="Каталог">
+															<select class="input order__input" name='cat_${counter}'>`;
+
+		adem_ajax.catalogs.forEach(function (item) {
+			rowHtml += `<option value="${item.name}">${item.name}</option>`
+		});
+
+		rowHtml += `</select>
+		</td>
+		<td data-name="Стр.">
+			<input class="input order__input" type='text' name='page_${counter}'>
+		</td>
+		<td data-name="Рис.">
+			<input class="input order__input" type='text' name='img_${counter}'>
+		</td>
+		<td data-name="Название на русском">
+			<input class="input order__input" type='text' name='name_${counter}'>
+		</td>
+		<td data-name="Кол-во">
+			<input class="input order__input" type='text' name='count_${counter}'>
+		</td>
+		<td data-name="Артикул">
+			<input class="input order__input" type='text' name='art_${counter}'>
+		</td>
+		<td data-name="Размер">
+			<input class="input order__input" type='text' name='size_${counter}'>
+		</td>
+		<td data-name="Цвет">
+			<input class="input order__input" type='text' name='color_${counter}'>
+		</td>
+		<td data-name="Цена (EURO)">
+			<input class="input order__input" type='text' name='price_${counter}'>
+		</td>
+	</tr>`;
+
+		lastRow.insertAdjacentHTML('afterend', rowHtml);
+
+		document.querySelector('input[name=catalog_count]').value = counter;
+		counter++;
+	}
+
+	addCatalogRow();
+
+	addBtn.addEventListener('click', addCatalogRow);
+
+	function calcOrder() {
+		let rows = document.querySelectorAll('.order__catalog-row');
+		let total = 0;
+		let percent = document.querySelector('input[name=percent]').value;
+		let result;
+
+		rows.forEach(function (row) {
+			let quantity = row.querySelector('input[name^=count_]').value;
+			let price = row.querySelector('input[name^=price_]').value;
+
+			total += quantity * price;
+		});
+
+		if (percent) {
+			total += total * percent / 100;
+			result = 'Сумма заказа с учетом доставки ' + total + ' EUR';
+		} else {
+			result = 'Сумма заказа без учета доставки ' + total + ' EUR';
+		}
+
+		if (total > 0) {
+			document.querySelector('.order__total-text').innerHTML = `<strong>${result}</strong>`;
+		}
+	}
+
+	calcOrderBtn.addEventListener('click', calcOrder);
+
+	form.addEventListener('submit', function (e) {
+		e.preventDefault();
+
+		let formData = new FormData(form);
+		const formName = form.getAttribute('name');
+		const submitBtm = form.querySelector('button[type=submit]');
+		const submitBtnText = submitBtm.innerHTML;
+
+		if (formName) {
+			formData.append('form_name', formName);
+			formData.append('action', 'make_order');
+			submitBtm.innerHTML = 'Отправляю...'
+		} else {
+			return;
+		}
+
+		form.classList.add('loading');
+
+		const response = fetch(adem_ajax.url, {
+			method: 'POST',
+			body: formData
+		})
+			.then(response => response.text())
+			.then(data => {
+				form.reset();
+				form.classList.remove('loading');
+				submitBtm.innerHTML = submitBtnText;
+
+				document.querySelector('#order-success strong').innerHTML = data;
+
+				setTimeout(function () {
+					Fancybox.show([{
+						src: '#order-success',
+						type: 'inline'
+					}]);
+				}, 100);
+			})
+			.catch((error) => {
+				console.error('Error:', error);
+			});
+	});
+}
+
 document.addEventListener("DOMContentLoaded", function () {
 	Fancybox.bind();
 
@@ -359,8 +440,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	initSidebarMenu();
 	initTabs();
 	loadMorePosts();
+	orderFromCatalogs();
 	setTelMask();
 	sendForms();
 	sendStatusForm();
-	sendSubscribeForm();
 });

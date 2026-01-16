@@ -7,68 +7,27 @@
 	font-size: 18px;
 	border: none;
 	border-radius: 10px;
+	transition: all 0.3s linear;
 
 	&--main {
 		background-color: var(--color-accent);
-	}
-}
-
-.btn-old {
-	border: none;
-
-	&_main {
-		display: block;
-		width: 100%;
-		padding: 5px 10px 3px;
-		color: #fff;
-		font-size: 14px;
-		text-transform: uppercase;
-		background-color: #337ab7;
-		transition: all 0.3s linear;
-		@include mob {
-			font-size: 10px;
+		@include hover {
+			background-color: #dc3627;
 		}
+	}
+
+	&--secondary {
+		background-color: #337ab7;
 		@include hover {
 			background-color: #286090;
 		}
 	}
 
-	&_success {
+	&--success {
 		min-width: 100px;
-		padding: 10px 15px;
-		color: #fff;
 		background-color: #4bb71b;
-		transition: all 0.3s linear;
 		@include hover {
 			background-color: #6ed93f;
-		}
-	}
-
-	&_submit {
-		display: block;
-		margin: 0 auto;
-		padding: 10px 15px 8px;
-		color: #fff;
-		font-weight: 700;
-		text-transform: uppercase;
-		background-color: var(--color-accent);
-		transition: all 0.3s linear;
-		@include hover {
-			background-color: #e94e4e;
-		}
-	}
-
-	&_add {
-		display: block;
-		width: 28px;
-		height: 28px;
-		margin: 0 auto;
-		padding: 5px;
-		color: #fff;
-		background-color: #337ab7;
-		transition: all 0.3s linear;
-		@include hover {
-			background-color: #286090;
 		}
 	}
 }
