@@ -226,29 +226,35 @@ function loadMorePosts() {
 		observer.observe(ajax_loader);
 
 		function load_more(element, observer) {
-			const ajax_loader = document.querySelector('#ajax_loader');
+			const ajaxLoader = document.querySelector('#ajax_loader');
 
 			if (element[0].intersectionRatio) {
-				ajax_loader.classList.add('loading');
-				current_page++;
+				ajaxLoader.classList.add('loading');
+				catalog_current_page++;
 
-				$.ajax({
-					url: adem_ajax.url,
-					data: {
+				const response = fetch(adem_ajax.url, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+					},
+					body: new URLSearchParams({
 						'action': 'load_more',
-						'page': current_page,
-						'query': JSON.stringify(query)
-					},
-					type: 'POST',
-					success: function (data) {
+						'query': JSON.stringify(catalog_query),
+						'page': catalog_current_page,
+						'nonce': catalog_nonce,
+					})
+				})
+					.then(response => response.text())
+					.then(data => {
 						if (data) {
-							$('.page__grid').append(data);
+							$('.catalog__grid').append(data);
 						}
-					},
-					complete: function () {
-						ajax_loader.classList.remove('loading');
-					}
-				});
+
+						ajaxLoader.classList.remove('loading');
+					})
+					.catch((error) => {
+						console.error('Error:', error);
+					});
 			}
 		}
 	}

@@ -1,18 +1,11 @@
 @use "../helpers" as *;
 
-.tease-post {
+.catalog-card {
 	position: relative;
-	width: calc(100% / 4 - 12px);
-	height: 314px;
-	margin: 0 15px 15px 0;
 
-	&:nth-child(4n + 4) {
-		margin-right: 0;
-	}
+	&:hover {
 
-	@include hover {
-
-		.tease-post__info {
+		.catalog-card__info {
 			visibility: visible;
 			opacity: 1;
 
@@ -23,18 +16,18 @@
 			}
 		}
 
-		.tease-post__link {
+		.catalog-card__link {
 			transform: none;
 		}
 
-		.tease-post__title {
+		.catalog-card__title {
 			transform: none;
 			visibility: inherit;
 			opacity: 1;
 		}
 	}
 
-	img {
+	&__img {
 		display: block;
 		width: 100%;
 		height: 100%;
@@ -43,12 +36,10 @@
 
 	&__info {
 		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
+		inset: 0;
 		display: flex;
 		flex-direction: column;
+		gap: 5px;
 		align-items: center;
 		justify-content: center;
 		overflow: hidden;
@@ -57,6 +48,22 @@
 		visibility: hidden;
 		opacity: 0;
 		transition: all 0.5s;
+
+		&::after {
+			position: absolute;
+			bottom: 10px;
+			display: inline-block;
+			width: 20%;
+			height: 2px;
+			background-color: #fff;
+			transform: scale(0.2, 0.2);
+			transform-origin: 50% 50%;
+			transform-style: flat;
+			visibility: hidden;
+			opacity: 0;
+			transition: all 0.5s 0.15s;
+			content: '';
+		}
 	}
 
 	&__link {
@@ -81,10 +88,6 @@
 		&:nth-child(2) {
 			transition: all 0.5s 0.1s;
 		}
-
-		&:not(:last-child) {
-			margin-bottom: 5px;
-		}
 	}
 
 	&__title {
@@ -95,9 +98,7 @@
 		font-size: 13px;
 		text-transform: uppercase;
 		background-color: rgba(#fff, 0.15);
-		transform: 	translate3d(0, 0, 0.001px)
-		rotateX(90deg)
-		scale(0.8, 0.8);
+		transform: translate3d(0, 0, 0.001px) rotateX(90deg) scale(0.8, 0.8);
 		transform-origin: 50% 100%;
 		transform-style: flat;
 		visibility: hidden;
@@ -105,34 +106,6 @@
 		transition: all 0.5s;
 		@include mob {
 			font-size: 12px;
-		}
-	}
-}
-
-@supports (display: grid) {
-
-	.tease-post {
-		width: auto;
-		height: auto;
-		margin: 0;
-	}
-
-	.tease-post__info {
-
-		&::after {
-			position: absolute;
-			bottom: 10px;
-			display: inline-block;
-			width: 20%;
-			height: 2px;
-			background-color: #fff;
-			transform: scale(0.2, 0.2);
-			transform-origin: 50% 50%;
-			transform-style: flat;
-			visibility: hidden;
-			opacity: 0;
-			transition: all 0.5s 0.15s;
-			content: '';
 		}
 	}
 }

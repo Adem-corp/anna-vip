@@ -6,7 +6,7 @@
  * @since 1.0.0
  */
 
-$text = get_sub_field( 'text' )
+$text = get_sub_field( 'text' );
 ?>
 
 <section class="text">
