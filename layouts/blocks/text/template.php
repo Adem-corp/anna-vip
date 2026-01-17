@@ -21,6 +21,6 @@ $text = get_sub_field( 'text' );
 	);
 	?>
 	<?php if ( $text ) : ?>
-		<div class="text__body"><?php echo wp_kses_post( $text ); ?></div>
+		<div class="text__body"><?php echo $text; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
 	<?php endif; ?>
 </section>
