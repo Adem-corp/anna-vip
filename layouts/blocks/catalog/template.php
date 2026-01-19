@@ -1,6 +1,6 @@
 <?php
 /**
- * Text template.
+ * Catalog template.
  *
  * @package Anna-vip
  * @since 1.0.0

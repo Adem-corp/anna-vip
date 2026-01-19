@@ -1,6 +1,6 @@
 <?php
 /**
- * Status template.
+ * Sizes template.
  *
  * @package Anna-vip
  * @since 1.0.0

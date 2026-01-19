@@ -1,6 +1,6 @@
 <?php
 /**
- * The Post template
+ * The Catalog-card template
  *
  * @package Anna-vip
  * @since 1.0.0
