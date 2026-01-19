@@ -273,14 +273,14 @@ function burgerToggle() {
 }
 
 function initSidebarMenu() {
-	$('.sidebar__menu > .menu-item').on('mouseenter', function (e) {
-		e.preventDefault();
-		$(this).siblings().find('.sub-menu').hide();
-		$(this).find('.sub-menu').fadeIn();
-		$(this).addClass('hover');
-	}).on('mouseleave', function () {
-		$('.sub-menu').hide();
-		$(this).removeClass('hover');
+	const sidebar = document.querySelector('.sidebar');
+
+	sidebar.addEventListener('click', function (e) {
+		const target = e.target.closest('a[href="#"]');
+
+		if (target) {
+			e.preventDefault();
+		}
 	});
 }
 
