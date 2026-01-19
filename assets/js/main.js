@@ -439,10 +439,60 @@ function orderFromCatalogs() {
 	});
 }
 
+function initReviewsSlider() {
+	const section = document.querySelector('.reviews');
+
+	if (!section) return;
+
+	const swiper = new Swiper(section.querySelector('.swiper'), {
+		slidesPerView: 1,
+		spaceBetween: 8,
+		centerInsufficientSlides: true,
+		navigation: {
+			nextEl: section.querySelector('.arrow_right'),
+			prevEl: section.querySelector('.arrow_left'),
+		},
+		pagination: {
+			el: section.querySelector('.swiper-pagination'),
+			type: 'bullets',
+			clickable: true
+		},
+		breakpoints: {
+			769: {
+				slidesPerView: 2,
+				spaceBetween: 15,
+			},
+			1025: {
+				slidesPerView: 3,
+				spaceBetween: 15,
+			},
+			1281: {
+				slidesPerView: 3,
+				spaceBetween: 30,
+			},
+		}
+	});
+
+	section.querySelectorAll('.review-card').forEach((card, index) => {
+		const id = `review-popup-${index}`;
+		const popup = document.createElement('div');
+
+		popup.id = id;
+		popup.style.display = 'none';
+		popup.innerHTML = card.outerHTML;
+
+		document.body.appendChild(popup);
+
+		card.setAttribute('data-fancybox', 'reviews');
+		card.setAttribute('data-src', `#${id}`);
+	});
+}
+
 document.addEventListener("DOMContentLoaded", function () {
 	Fancybox.bind();
 
 	burgerToggle();
+	initReviewsSlider();
 	initSidebarMenu();
 	initTabs();
 	loadMorePosts();

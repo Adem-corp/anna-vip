@@ -18,6 +18,15 @@
 
 	&:is(h2) {
 		font-size: 42px;
+		@include laptop-sm {
+			font-size: 38px;
+		}
+		@include tablet-sm {
+			font-size: 32px;
+		}
+		@include mob {
+			font-size: 28px;
+		}
 	}
 
 	&--center {

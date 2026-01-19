@@ -1,1 +1,11 @@
 @use "../../../node_modules/normalize.css/normalize.css";
+
+.f-button.is-close-button {
+	--f-button-bg: var(--color-accent);
+	--f-button-hover-bg: #dc3627;
+	--f-button-border-radius: 100%;
+	--f-button-svg-width: 20px;
+	--f-button-svg-height: 20px;
+	top: 10px;
+	right: 10px;
+}

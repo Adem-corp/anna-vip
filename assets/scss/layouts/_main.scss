@@ -6,18 +6,18 @@
 		margin-top: 30px;
 	}
 
-	&__container {
-		display: flex;
-		@include from(769px) {
-			gap: 50px;
-		}
-		@include tablet-sm {
-			flex-direction: column-reverse;
+	&--w-sidebar {
+
+		.main__container {
+			@include from(1025px) {
+				display: grid;
+				grid-template-columns: 200px minmax(0, 1fr);
+				gap: 50px;
+			}
 		}
 	}
 
 	&__content {
-		flex: 1 0;
 
 		section {
 

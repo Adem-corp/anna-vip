@@ -88,6 +88,7 @@ require 'inc/load-more.php';
 require 'inc/mail.php';
 require 'inc/order.php';
 require 'inc/rest.php';
+require 'inc/reviews.php';
 require 'inc/status.php';
 require 'inc/svg.php';
 require 'inc/theme-functions.php';
