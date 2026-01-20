@@ -1,6 +1,7 @@
 @use "../helpers" as *;
 
 .title {
+	color: #353535;
 	font-weight: 600;
 
 	&:is(h1) {

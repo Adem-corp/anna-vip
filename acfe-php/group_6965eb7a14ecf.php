@@ -53,6 +53,54 @@ acf_add_local_field_group(array(
 				'acfe_flexible_grid_wrap' => false,
 			),
 			'layouts' => array(
+				'layout_696f3d91b93a2' => array(
+					'key' => 'layout_696f3d91b93a2',
+					'name' => 'info',
+					'label' => 'Информация',
+					'display' => 'block',
+					'sub_fields' => array(
+						array(
+							'key' => 'field_696f3d91b93a3',
+							'label' => '',
+							'name' => '',
+							'type' => 'clone',
+							'instructions' => '',
+							'required' => 0,
+							'conditional_logic' => 0,
+							'wrapper' => array(
+								'width' => '',
+								'class' => '',
+								'id' => '',
+							),
+							'clone' => array(
+								0 => 'group_696f3cd3c7218',
+							),
+							'display' => 'seamless',
+							'layout' => 'block',
+							'prefix_label' => 0,
+							'prefix_name' => 0,
+							'acfe_seamless_style' => 0,
+							'acfe_clone_modal' => 0,
+							'acfe_clone_modal_close' => 0,
+							'acfe_clone_modal_button' => '',
+							'acfe_clone_modal_size' => 'large',
+						),
+					),
+					'min' => '',
+					'max' => '',
+					'acfe_flexible_thumbnail' => '',
+					'acfe_flexible_render_template' => false,
+					'acfe_flexible_render_style' => false,
+					'acfe_flexible_render_script' => false,
+					'acfe_flexible_settings' => false,
+					'acfe_flexible_settings_size' => 'medium',
+					'acfe_layout_locations' => array(
+					),
+					'acfe_flexible_modal_edit_size' => false,
+					'acfe_flexible_category' => false,
+					'acfe_layout_col' => 'auto',
+					'acfe_layout_allowed_col' => false,
+				),
 				'layout_696b4b01a06d1' => array(
 					'key' => 'layout_696b4b01a06d1',
 					'name' => 'catalog',
@@ -428,7 +476,7 @@ acf_add_local_field_group(array(
 	'acfe_display_title' => '',
 	'acfe_meta' => '',
 	'acfe_note' => '',
-	'modified' => 1768805526,
+	'modified' => 1768897955,
 ));
 
 endif;

@@ -275,6 +275,8 @@ function burgerToggle() {
 function initSidebarMenu() {
 	const sidebar = document.querySelector('.sidebar');
 
+	if (!sidebar) return;
+
 	sidebar.addEventListener('click', function (e) {
 		const target = e.target.closest('a[href="#"]');
 
@@ -448,10 +450,6 @@ function initReviewsSlider() {
 		slidesPerView: 1,
 		spaceBetween: 8,
 		centerInsufficientSlides: true,
-		navigation: {
-			nextEl: section.querySelector('.arrow_right'),
-			prevEl: section.querySelector('.arrow_left'),
-		},
 		pagination: {
 			el: section.querySelector('.swiper-pagination'),
 			type: 'bullets',
@@ -488,10 +486,29 @@ function initReviewsSlider() {
 	});
 }
 
+function initInfoSlider() {
+	const sections = document.querySelectorAll('.info');
+
+	if (!sections) return;
+
+	sections.forEach(function (section) {
+		const swiper = new Swiper(section.querySelector('.swiper'), {
+			slidesPerView: 1,
+			spaceBetween: 30,
+			centerInsufficientSlides: true,
+			navigation: {
+				nextEl: section.querySelector('.arrow--next'),
+				prevEl: section.querySelector('.arrow--prev'),
+			},
+		});
+	});
+}
+
 document.addEventListener("DOMContentLoaded", function () {
 	Fancybox.bind();
 
 	burgerToggle();
+	initInfoSlider();
 	initReviewsSlider();
 	initSidebarMenu();
 	initTabs();

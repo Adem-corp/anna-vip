@@ -52,3 +52,41 @@
 		}
 	}
 }
+
+.arrows {
+	display: flex;
+	gap: 15px;
+	justify-content: space-between;
+	pointer-events: none;
+}
+
+.arrow {
+	display: grid;
+	place-items: center;
+	width: 30px;
+	height: 30px;
+	padding: 0;
+	color: #fff;
+	background: var(--color-accent);
+	border: none;
+	border-radius: 5px;
+	pointer-events: auto;
+
+	&:disabled {
+		opacity: 0.5;
+	}
+
+	&--prev {
+
+		.arrow__icon {
+			margin-left: -2px;
+		}
+	}
+
+	&--next {
+
+		.arrow__icon {
+			margin-right: -2px;
+		}
+	}
+}
