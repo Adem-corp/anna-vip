@@ -1,0 +1,64 @@
+@use "../helpers" as *;
+
+.cert {
+	margin-block: 60px 90px;
+	display: flex;
+	gap: 60px;
+	align-items: center;
+	background: url(assets/images/cert-bg.jpg) center / cover;
+	@include laptop {
+		gap: 30px;
+	}
+	@include laptop-sm {
+		margin-block: 60px;
+	}
+	@include tablet {
+		flex-direction: column-reverse;
+		gap: 0;
+	}
+	@include mob {
+		margin-block: 40px;
+	}
+
+	&__img {
+		margin: -30px 0 -70px 60px;
+		@include laptop {
+			margin-left: 0;
+		}
+		@include laptop-sm {
+			max-width: 400px;
+			margin: 0;
+		}
+		@include mob {
+			max-width: 80vw;
+		}
+	}
+
+	&__body {
+		padding: 30px;
+		color: #fff;
+		line-height: 1.4;
+		@include mob {
+			padding: 25px 15px;
+		}
+	}
+
+	&__title {
+		font-size: 35px;
+		@include laptop-sm {
+			font-size: 30px;
+		}
+		@include mob {
+			font-size: 28px;
+		}
+	}
+
+	&__text {
+		margin-top: 15px;
+		font-weight: 300;
+		font-size: 20px;
+		@include mob {
+			font-size: 18px;
+		}
+	}
+}
