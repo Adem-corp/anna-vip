@@ -10,6 +10,7 @@ $option_tel    = get_field( 'tel', 'option' );
 $option_email  = get_field( 'email', 'option' );
 $option_social = get_field( 'social', 'option' );
 $sidebar       = get_field( 'sidebar' );
+$hero_title    = get_field( 'title' );
 $main_class    = 'main';
 
 if ( $sidebar ) {
@@ -132,6 +133,11 @@ if ( $sidebar ) {
 		</div>
 	</div>
 </header>
+<?php
+if ( $hero_title ) {
+	get_template_part( 'layouts/partials/hero' );
+}
+?>
 <main class="<?php echo esc_attr( $main_class ); ?>">
 	<div class="container main__container">
 		<?php

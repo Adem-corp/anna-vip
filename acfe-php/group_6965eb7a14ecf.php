@@ -509,7 +509,7 @@ acf_add_local_field_group(array(
 			),
 		),
 	),
-	'menu_order' => 0,
+	'menu_order' => 10,
 	'position' => 'acf_after_title',
 	'style' => 'default',
 	'label_placement' => 'top',
@@ -524,7 +524,7 @@ acf_add_local_field_group(array(
 	'acfe_display_title' => '',
 	'acfe_meta' => '',
 	'acfe_note' => '',
-	'modified' => 1769416528,
+	'modified' => 1769418635,
 ));
 
 endif;
