@@ -14,7 +14,7 @@ $price  = get_field( 'price' );
 <article class="prod-card">
 	<div class="prod-card__top">
 		<?php if ( $is_top ) : ?>
-			<div class="prod-card__marker">
+			<div class="prod-marker prod-card__marker">
 				<svg width="16" height="16">
 					<use xlink:href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/sprite.svg#i-top' ); ?>"></use>
 				</svg>
@@ -27,7 +27,7 @@ $price  = get_field( 'price' );
 			array( 'class' => 'prod-card__img' )
 		);
 		?>
-		<button class="prod-card__show-btn" type="button" data-id="<?php the_ID(); ?>">Подробнее</button>
+		<button class="prod-card__show-btn js-show-product" type="button" data-id="<?php the_ID(); ?>">Подробнее</button>
 	</div>
 	<div class="prod-card__body">
 		<div class="prod-card__name"><?php the_title(); ?></div>

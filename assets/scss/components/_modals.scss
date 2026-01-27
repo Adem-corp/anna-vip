@@ -65,6 +65,99 @@
 	}
 }
 
+.modal-prod {
+	display: flex;
+	gap: 60px;
+	max-width: 1100px;
+	padding: 30px;
+	border-radius: 10px;
+	@include from(1025px) {
+		padding-right: 40px;
+	}
+	@include tablet {
+		flex-direction: column;
+		gap: 30px;
+	}
+	@include mob {
+		padding: 20px;
+	}
+
+	&__top {
+		position: relative;
+	}
+
+	&__img {
+		display: block;
+		@include from(1025px) {
+			max-width: 550px;
+		}
+	}
+
+	&__body {
+		display: grid;
+		gap: 22px;
+		align-content: start;
+	}
+
+	&__title {
+		color: #000;
+		font-weight: 600;
+		font-size: 25px;
+	}
+
+	&__delivery {
+		color: #616161;
+		font-weight: 600;
+
+		:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	&__price {
+		display: flex;
+		gap: 20px;
+		align-items: flex-start;
+	}
+
+	&__p-new {
+		color: #000;
+		font-weight: 800;
+		font-size: 25px;
+	}
+
+	&__p-old {
+		color: var(--color-accent);
+		font-weight: 500;
+		font-size: 20px;
+		text-decoration: line-through;
+	}
+
+	&__caption {
+		margin-bottom: 5px;
+		color: #616161;
+		font-weight: 600;
+	}
+
+	&__text {
+		font-weight: 300;
+
+		:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	&__footer {
+		display: flex;
+		gap: 30px;
+		margin-top: 10px;
+	}
+
+	&__btn {
+		width: 100%;
+	}
+}
+
 @keyframes stroke {
 
 	100% {

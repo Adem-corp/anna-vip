@@ -56,8 +56,9 @@ function adem_enqueue_scripts() {
 		'adem',
 		'adem_ajax',
 		array(
-			'url'      => admin_url( 'admin-ajax.php' ),
-			'catalogs' => get_field( 'catalogs', 'option' ),
+			'url'           => admin_url( 'admin-ajax.php' ),
+			'catalogs'      => get_field( 'catalogs', 'option' ),
+			'product_nonce' => wp_create_nonce( 'show_product' ),
 		)
 	);
 }

@@ -1,0 +1,15 @@
+@use "../helpers" as *;
+
+.prod-marker {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: flex;
+	gap: 5px;
+	align-items: center;
+	padding: 6px 10px;
+	color: #EF6806;
+	font-size: 14px;
+	background-color: #FFF8BB;
+	border-radius: 3px;
+}

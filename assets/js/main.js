@@ -504,10 +504,79 @@ function initInfoSlider() {
 	});
 }
 
+function showProductPopup() {
+	const section = document.querySelector('.products');
+	const modal = document.querySelector('#modal-product');
+
+	if (!section) return;
+
+	section.addEventListener('click', function (e) {
+		const btn = e.target.closest('.js-show-product');
+
+		const response = fetch(adem_ajax.url, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+			},
+			body: new URLSearchParams({
+				action: 'show_product',
+				id: btn.dataset.id,
+				nonce: adem_ajax.product_nonce,
+			})
+		})
+			.then(response => response.text())
+			.then(data => {
+				modal.innerHTML = data;
+
+				setTimeout(function () {
+					Fancybox.show([{
+						src: '#modal-product',
+						type: 'inline'
+					}]);
+				}, 100);
+			})
+			.catch((error) => {
+				console.error('Error:', error);
+			});
+	});
+}
+
+function changeQuantity() {
+	const block = document.querySelector('.js-qty');
+
+	if (!block) return;
+
+	block.addEventListener('click', function (e) {
+		const btn = e.target.closest('.qty__btn');
+
+		if (!btn) return;
+
+		const input = block.querySelector('.input');
+		const min = parseInt(input.min, 10);
+		const max = parseInt(input.max, 10);
+		const hasMin = !isNaN(min);
+		const hasMax = !isNaN(max);
+
+		let val = parseInt(input.value, 10) || 0;
+
+		if (btn.classList.contains('qty__btn--plus')) {
+			val++;
+		} else {
+			val--;
+		}
+
+		if (hasMin) val = Math.max(val, min);
+		if (hasMax) val = Math.min(val, max);
+
+		input.value = val;
+	});
+}
+
 document.addEventListener("DOMContentLoaded", function () {
 	Fancybox.bind();
 
 	burgerToggle();
+	changeQuantity();
 	initInfoSlider();
 	initReviewsSlider();
 	initSidebarMenu();
@@ -517,4 +586,5 @@ document.addEventListener("DOMContentLoaded", function () {
 	setTelMask();
 	sendForms();
 	sendStatusForm();
+	showProductPopup();
 });

@@ -17,3 +17,5 @@
 	<div class="modal__text">Ваш заказ № <strong></strong> отправлен.</div>
 	<button class="btn btn--success" type="button" data-fancybox-close>OK</button>
 </div>
+
+<div class="modal-prod js-qty" id="modal-product"></div>

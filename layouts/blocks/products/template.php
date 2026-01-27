@@ -26,7 +26,7 @@ $products = get_sub_field( 'products' );
 			foreach ( $products as $post ) {
 				setup_postdata( $post );
 
-				get_template_part( 'layouts/cards/prod-card', );
+				get_template_part( 'layouts/cards/prod-card' );
 			}
 
 			wp_reset_postdata();

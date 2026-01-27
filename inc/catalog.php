@@ -38,3 +38,29 @@ function adem_register_product_post_type() {
 		)
 	);
 }
+
+add_action( 'wp_ajax_show_product', 'show_product' );
+add_action( 'wp_ajax_nopriv_show_product', 'show_product' );
+/**
+ * Handler for ajax request.
+ */
+function show_product() {
+	if ( ! isset( $_POST['nonce'] ) || ! isset( $_POST['id'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'show_product' ) ) {
+		exit;
+	}
+
+	ob_start();
+
+	get_template_part(
+		'layouts/partials/modal-prod-inner',
+		null,
+		array(
+			'id' => sanitize_text_field( wp_unslash( $_POST['id'] ) ),
+		)
+	);
+
+	$return_html = ob_get_clean();
+
+	adem_wp_kses_post_more( $return_html, array( 'svg', 'input' ) );
+	wp_die();
+}
