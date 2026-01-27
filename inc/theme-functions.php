@@ -196,3 +196,18 @@ function adem_wp_kses_post_more( $content, $tag, $display = true ) {
 
 	return wp_kses( $content, $allowed_tags );
 }
+
+/**
+ * Formats a numeric value as a price with a ruble symbol.
+ *
+ * @param int|float|string $number Numeric value to format.
+ *
+ * @return string Formatted price or empty string if not numeric.
+ */
+function adem_number_format( $number ) {
+	if ( ! is_numeric( $number ) ) {
+		return '';
+	}
+
+	return number_format( (float) $number, 0, '', ' ' ) . ' ₽';
+}

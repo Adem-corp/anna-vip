@@ -1,0 +1,31 @@
+@use "../helpers" as *;
+
+.products {
+	margin-block: 60px;
+	@include mob {
+		margin-block: 40px;
+	}
+
+	&__body {
+		display: grid;
+		gap: 30px;
+		@include from(426px) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+		@include from(769px) {
+			grid-template-columns: repeat(3, 1fr);
+		}
+		@include from(1025px) {
+			grid-template-columns: repeat(4, 1fr);
+		}
+		@include from(1441px) {
+			grid-template-columns: repeat(5, 1fr);
+		}
+		@include tablet {
+			gap: 20px;
+		}
+		@include mob {
+			gap: 15px;
+		}
+	}
+}
