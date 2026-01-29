@@ -11,6 +11,13 @@ $is_top     = get_field( 'is-top', $product_id );
 $delivery   = get_field( 'delivery', $product_id );
 $price      = get_field( 'price', $product_id );
 $text       = get_field( 'text', $product_id );
+$in_cart    = adem_check_prod_in_cart( $product_id );
+
+$btn_classes = array( 'btn', 'btn--main', 'modal-prod__btn', 'js-add-to-cart' );
+
+if ( $in_cart ) {
+	$btn_classes[] = 'in-cart';
+}
 ?>
 
 <div class="modal-prod__top">
@@ -61,6 +68,7 @@ $text       = get_field( 'text', $product_id );
 				</svg>
 			</button>
 		</div>
-		<button class="btn btn--main modal-prod__btn" type="button">В корзину</button>
+		<button class="<?php echo esc_attr( implode( ' ', $btn_classes ) ); ?>" type="button" data-id="<?php echo esc_attr( $product_id ); ?>">В корзину</button>
+		<div class="modal-prod__alert">Товар добавлен в корзину.</div>
 	</div>
 </div>

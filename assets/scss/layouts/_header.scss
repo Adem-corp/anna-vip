@@ -103,9 +103,27 @@
 	}
 
 	&__cart {
+		position: relative;
 		@include tablet {
 			order: 1;
 		}
+	}
+
+	&__cart-count {
+		position: absolute;
+		top: -5px;
+		right: -5px;
+		display: grid;
+		width: 20px;
+		height: 20px;
+		color: var(--color-accent);
+		font-size: 12px;
+		line-height: 20px;
+		background-color: #fff;
+		border: 1px solid var(--color-accent);
+		border-radius: 100%;
+		content: attr(data-count);
+		place-items: center;
 	}
 
 	&__burger-btn {

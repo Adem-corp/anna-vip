@@ -1,0 +1,102 @@
+@use "../helpers" as *;
+
+.cart {
+	margin-block: 60px;
+	@include mob {
+		margin-block: 40px;
+	}
+
+	&__body {
+		display: grid;
+		gap: 30px;
+		align-items: start;
+		@include from(1025px) {
+			grid-template-columns: 1fr 350px;
+		}
+	}
+
+	&__content {
+		display: grid;
+		gap: 20px;
+		padding: 20px;
+		font-size: 20px;
+		border: 2px solid #bb3024;
+		border-radius: 10px;
+		box-shadow: 0 0 20px 0 rgba(82, 82, 82, 0.1);
+		@include tablet {
+			padding: 10px;
+			font-size: 18px;
+		}
+	}
+
+	&__item {
+		display: grid;
+		grid-template-columns: 1fr 75px 120px 30px;
+		gap: 10px;
+		align-items: center;
+		@include tablet {
+			grid-template-columns: 1fr 60px 90px 30px;
+		}
+		@include mob {
+			grid-template-columns: 1fr 60px 90px 30px;
+		}
+
+		&:not(.cart__total) {
+			@include mob {
+				border-bottom: 1px solid #e1e1e1;
+			}
+		}
+	}
+
+	&__name {
+		width: fit-content;
+		text-decoration: none;
+		@include mob {
+			grid-column: span 3;
+		}
+		@include hover {
+			text-decoration: underline;
+		}
+	}
+
+	&__count {
+		grid-column: 2;
+	}
+
+	&__del-btn {
+		display: grid;
+		place-items: center;
+		width: 30px;
+		height: 30px;
+		padding: 0;
+		color: var(--color-accent);
+		background: none;
+		border: none;
+		border-radius: 4px;
+		transition: all 0.3s ease-in-out;
+		@include mob {
+			grid-row: 1 / span 2;
+			grid-column: 4;
+			align-self: start;
+		}
+		@include hover {
+			color: #fff;
+			background-color: var(--color-accent);
+		}
+	}
+
+	&__total {
+		font-weight: 600;
+	}
+
+	&__alert {
+		grid-column: 1 / -1;
+		color: var(--color-accent);
+		text-align: right;
+	}
+
+	&__form {
+		display: grid;
+		gap: 15px;
+	}
+}

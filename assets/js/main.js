@@ -169,6 +169,12 @@ function sendForms() {
 							type: 'inline'
 						}]);
 					}, 100);
+
+					if ('Корзина' === formName) {
+						document.cookie = `anna_cart=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+						form.closest('.cart__body').replaceWith('В корзине пусто. Сначала добавьте товары в корзину.');
+						setCartCount(0);
+					}
 				})
 				.catch((error) => {
 					console.error('Error:', error);
@@ -513,6 +519,8 @@ function showProductPopup() {
 	section.addEventListener('click', function (e) {
 		const btn = e.target.closest('.js-show-product');
 
+		if (!btn) return;
+
 		const response = fetch(adem_ajax.url, {
 			method: 'POST',
 			headers: {
@@ -572,9 +580,122 @@ function changeQuantity() {
 	});
 }
 
+function addToCart() {
+	document.addEventListener('click', function (e) {
+		const btn = e.target.closest('.js-add-to-cart, .js-del-from-cart');
+
+		if (!btn) return;
+
+		if (btn.classList.contains('js-add-to-cart')) {
+			let qty = 1;
+			let qtyBlock = btn.previousElementSibling;
+
+			if (qtyBlock.classList.contains('qty')) {
+				const input = qtyBlock.querySelector('.qty__input');
+
+				if (input && input.value > 0) {
+					qty = parseInt(input.value, 10);
+				}
+			}
+
+			btn.classList.add('in-cart');
+
+			addToCart(btn.dataset.id, qty);
+		}
+
+		if (btn.classList.contains('js-del-from-cart')) {
+
+			delFromCart(btn.dataset.id);
+
+			window.location.reload();
+		}
+	});
+
+	const CART_COOKIE = 'anna_cart';
+	const CART_DAYS = 7;
+
+	function getCart() {
+		const match = document.cookie.match(new RegExp('(^| )' + CART_COOKIE + '=([^;]+)'));
+
+		if (!match) return {};
+
+		try {
+			return JSON.parse(decodeURIComponent(match[2]));
+		} catch {
+			return {};
+		}
+	}
+
+	function setCart(cart) {
+		const date = new Date();
+
+		date.setTime(date.getTime() + (CART_DAYS * 24 * 60 * 60 * 1000));
+
+		document.cookie =
+			CART_COOKIE + '=' + encodeURIComponent(JSON.stringify(cart)) +
+			'; path=/' +
+			'; expires=' + date.toUTCString();
+	}
+
+	function addToCart(productId, qty) {
+		const cart = getCart();
+		let count = 0;
+
+		if (cart[productId]) {
+			cart[productId] += qty;
+		} else {
+			cart[productId] = qty;
+		}
+
+		setCart(cart);
+
+		Object.values(cart).forEach(function (prod) {
+			count += prod;
+		});
+
+		setCartCount(count);
+
+		document.querySelectorAll(`.js-add-to-cart[data-id="${productId}"]`).forEach(function (btn) {
+			btn.classList.add('in-cart');
+		});
+	}
+
+	function delFromCart(productId) {
+		const cart = getCart();
+		let count = 0;
+
+		if (cart[productId]) {
+			delete cart[productId];
+		}
+
+		setCart(cart);
+
+		Object.values(cart).forEach(function (prod) {
+			count += prod;
+		});
+
+		setCartCount(count);
+	}
+}
+
+function setCartCount(count) {
+	const container = document.querySelector('.header__cart-count');
+
+	if (!container) return;
+
+	container.textContent = count;
+
+	if (count > 0) {
+		container.classList.remove('hidden');
+	} else {
+		container.classList.add('hidden');
+	}
+}
+
 document.addEventListener("DOMContentLoaded", function () {
 	Fancybox.bind();
 
+	addToCart();
 	burgerToggle();
 	changeQuantity();
 	initInfoSlider();

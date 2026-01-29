@@ -6,9 +6,16 @@
  * @since 1.0.0
  */
 
-$is_top = get_field( 'is-top' );
-$params = get_field( 'params' );
-$price  = get_field( 'price' );
+$is_top  = get_field( 'is-top' );
+$params  = get_field( 'params' );
+$price   = get_field( 'price' );
+$in_cart = adem_check_prod_in_cart( get_the_ID() );
+
+$btn_classes = array( 'prod-card__cart-btn', 'js-add-to-cart' );
+
+if ( $in_cart ) {
+	$btn_classes[] = 'in-cart';
+}
 ?>
 
 <article class="prod-card">
@@ -49,7 +56,7 @@ $price  = get_field( 'price' );
 				<sup class="prod-card__p-old"><?php echo esc_html( adem_number_format( $price['old'] ) ); ?></sup>
 			<?php endif; ?>
 		</div>
-		<button class="prod-card__cart-btn" type="button">
+		<button class="<?php echo esc_attr( implode( ' ', $btn_classes ) ); ?>" type="button" data-id="<?php the_ID(); ?>">
 			<svg width="20" height="20">
 				<use xlink:href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/sprite.svg#i-prod-cart' ); ?>"></use>
 			</svg>

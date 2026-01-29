@@ -9,8 +9,10 @@
 $option_tel    = get_field( 'tel', 'option' );
 $option_email  = get_field( 'email', 'option' );
 $option_social = get_field( 'social', 'option' );
+$option_cart   = get_field( 'cart-page', 'option' );
 $sidebar       = get_field( 'sidebar' );
 $hero_title    = get_field( 'title' );
+$cart_count    = adem_get_count_in_cart();
 $main_class    = 'main';
 
 if ( $sidebar ) {
@@ -101,13 +103,16 @@ if ( $sidebar ) {
 				</nav>
 				<?php if ( $option_social ) : ?>
 					<ul class="reset-list social header__social">
-						<li class="header__cart">
-							<a href="#" class="social__link">
-								<svg width="36" height="36">
-									<use xlink:href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/sprite.svg#i-cart' ); ?>"></use>
-								</svg>
-							</a>
-						</li>
+						<?php if ( $option_cart ) : ?>
+							<li class="header__cart">
+								<a href="<?php echo esc_url( get_page_link( $option_cart ) ); ?>" class="social__link">
+									<span class="header__cart-count <?php echo 0 === $cart_count ? 'hidden' : ''; ?>"><?php echo esc_html( $cart_count ); ?></span>
+									<svg width="36" height="36">
+										<use xlink:href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/sprite.svg#i-cart' ); ?>"></use>
+									</svg>
+								</a>
+							</li>
+						<?php endif; ?>
 						<?php foreach ( $option_social as $item ) : ?>
 							<li>
 								<a href="<?php echo esc_url( $item['link'] ); ?>" class="social__link">

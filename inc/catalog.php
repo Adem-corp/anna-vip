@@ -64,3 +64,59 @@ function show_product() {
 	adem_wp_kses_post_more( $return_html, array( 'svg', 'input' ) );
 	wp_die();
 }
+
+/**
+ * Checks if a product is in the cart.
+ *
+ * This function looks at the `anna_cart` cookie, which stores a JSON array in the format:
+ * [
+ *     "123" => 2, // key = product ID, value = quantity
+ *     "456" => 1
+ * ]
+ *
+ * If the given $product_id exists in the cookie, the function returns true; otherwise, false.
+ *
+ * @param int|string $product_id The ID of the product to check.
+ *
+ * @return bool Returns true if the product exists in the cart, false otherwise.
+ */
+function adem_check_prod_in_cart( $product_id ) {
+	if ( ! empty( $_COOKIE['anna_cart'] ) ) {
+
+		$cart = json_decode( wp_unslash( $_COOKIE['anna_cart'] ), true );
+
+		if ( is_array( $cart ) && isset( $cart[ $product_id ] ) ) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+/**
+ * Returns the total quantity of all products in the cart.
+ *
+ * Looks at the `anna_cart` cookie, which stores a JSON array like:
+ * [
+ *     "123" => 2, // key = product ID, value = quantity
+ *     "456" => 1
+ * ]
+ *
+ * @return int|null Total quantity of all products in the cart, or null if cart is empty.
+ */
+function adem_get_count_in_cart() {
+	$count = 0;
+
+	if ( ! empty( $_COOKIE['anna_cart'] ) ) {
+
+		$cart = json_decode( wp_unslash( $_COOKIE['anna_cart'] ), true );
+
+		if ( is_array( $cart ) ) {
+			foreach ( $cart as $prod ) {
+				$count += (int) $prod;
+			}
+		}
+	}
+
+	return $count;
+}

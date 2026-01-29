@@ -155,16 +155,25 @@ function adem_send_mail() {
 		exit;
 	}
 
-	$mail    = isset( $_POST['name'] ) ? 'Имя: ' . sanitize_text_field( wp_unslash( $_POST['name'] ) ) . '<br/>' : '';
-	$tel     = isset( $_POST['tel'] ) ? sanitize_text_field( wp_unslash( $_POST['tel'] ) ) : null;
-	$email   = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : null;
-	$message = isset( $_POST['message'] ) ? sanitize_text_field( wp_unslash( $_POST['message'] ) ) : null;
-	$order   = isset( $_POST['order'] ) ? sanitize_text_field( wp_unslash( $_POST['order'] ) ) : null;
-	$referer = isset( $_POST['_wp_http_referer'] ) ? sanitize_text_field( wp_unslash( $_POST['_wp_http_referer'] ) ) : null;
+	$mail     = isset( $_POST['name'] ) ? 'Имя: ' . sanitize_text_field( wp_unslash( $_POST['name'] ) ) . '<br/>' : '';
+	$tel      = isset( $_POST['tel'] ) ? sanitize_text_field( wp_unslash( $_POST['tel'] ) ) : null;
+	$email    = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : null;
+	$message  = isset( $_POST['message'] ) ? sanitize_text_field( wp_unslash( $_POST['message'] ) ) : null;
+	$order    = isset( $_POST['order'] ) ? sanitize_text_field( wp_unslash( $_POST['order'] ) ) : null;
+	$products = isset( $_POST['products'] ) ? json_decode( wp_unslash( $_COOKIE['anna_cart'] ), true ) : null;
+	$referer  = isset( $_POST['_wp_http_referer'] ) ? sanitize_text_field( wp_unslash( $_POST['_wp_http_referer'] ) ) : null;
 
 	$mail .= isset( $tel ) ? 'Телефон: <a href="tel:' . adem_clear_tel( $tel ) . '">' . $tel . '</a><br/>' : '';
 	$mail .= isset( $email ) ? 'Email: <a href="mailto:' . $email . '">' . $email . '</a><br/>' : '';
 	$mail .= isset( $message ) ? 'Сообщение: ' . $message . '<br/>' : '';
+
+	if ( $products ) {
+		$mail .= 'Товары для заказа:<br/>';
+		foreach ( $products as $prod_id => $count ) {
+			$mail .= get_the_title( $prod_id ) . ' - ' . $count . ' шт.<br/>';
+		}
+	}
+
 	$mail .= ! empty( $order ) ? 'Заказ: ' . $order . '<br/>' : '';
 	$mail .= isset( $referer ) ? 'Страница: ' . $referer . '<br/>' : '';
 

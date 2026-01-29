@@ -118,5 +118,11 @@
 		color: var(--color-accent);
 		background: none;
 		border: none;
+		border-radius: 4px;
+
+		&.in-cart {
+			color: #fff;
+			background-color: var(--color-accent);
+		}
 	}
 }

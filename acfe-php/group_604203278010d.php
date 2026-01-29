@@ -319,6 +319,55 @@ acf_add_local_field_group(array(
 			),
 			'acfe_repeater_stylised_button' => 0,
 		),
+		array(
+			'key' => 'field_6979e3d7c2f94',
+			'label' => 'Корзина',
+			'name' => '',
+			'type' => 'tab',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'placement' => 'left',
+			'endpoint' => 0,
+			'no_preference' => 0,
+		),
+		array(
+			'key' => 'field_6979e3dfc2f95',
+			'label' => 'Страница корзины',
+			'name' => 'cart-page',
+			'type' => 'post_object',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'post_type' => array(
+				0 => 'page',
+			),
+			'taxonomy' => '',
+			'allow_null' => 0,
+			'multiple' => 0,
+			'max' => '',
+			'return_format' => 'id',
+			'save_custom' => 0,
+			'save_post_status' => 'publish',
+			'acfe_add_post' => 0,
+			'acfe_edit_post' => 0,
+			'acfe_bidirectional' => array(
+				'acfe_bidirectional_enabled' => '0',
+			),
+			'ui' => 1,
+			'save_post_type' => '',
+			'min' => '',
+		),
 	),
 	'location' => array(
 		array(
@@ -344,7 +393,7 @@ acf_add_local_field_group(array(
 	'acfe_display_title' => '',
 	'acfe_meta' => '',
 	'acfe_note' => '',
-	'modified' => 1768289225,
+	'modified' => 1769595958,
 ));
 
 endif;

@@ -18,4 +18,14 @@
 	<button class="btn btn--success" type="button" data-fancybox-close>OK</button>
 </div>
 
+<div class="modal modal--success" id="modal-success">
+	<svg class="modal__success-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+		<circle class="modal__success-circle" cx="26" cy="26" r="25" fill="none" />
+		<path class="modal__success-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+	</svg>
+	<div class="modal__title">Спасибо!</div>
+	<div class="modal__text">Ваш заказ отправлена.<br>Наш менеджер свяжется с вами в ближайшее время.</div>
+	<button class="btn btn--success" type="button" data-fancybox-close>OK</button>
+</div>
+
 <div class="modal-prod js-qty" id="modal-product"></div>
